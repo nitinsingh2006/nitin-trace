@@ -17,6 +17,7 @@ import { fetchExecutionTrace } from './services/ai';
 import { escapeHtml } from './utils/helpers';
 import { initHistoryDB, saveTraceToHistory, getTraceHistory, deleteTraceFromHistory, clearAllTraceHistory } from './services/history';
 import { formatTime } from './utils/helpers';
+import { initFooter } from './components/footer';
 import {
   togglePlayback,
   stepForward,
@@ -415,6 +416,10 @@ function initApp() {
   initHistory();
   initExamples();
   initGitHub();
+
+  // Render footer at the bottom of the app shell
+  const appShell = document.querySelector('.app-shell');
+  if (appShell) initFooter(appShell);
 }
 
 /**
