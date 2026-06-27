@@ -16,9 +16,32 @@ import { test, expect } from '@playwright/test';
  */
 async function goToApp(page) {
   await page.addInitScript(() => {
+    const state = {
+      settings: {
+        geminiApiKey: 'dummy-key-for-testing',
+        groqApiKey: '',
+        openaiApiKey: '',
+        claudeApiKey: '',
+        explanationLanguage: 'english'
+      },
+      auth: {
+        isLoggedIn: true,
+        user: {
+          name: 'Nitin Singh',
+          email: 'nsingh987610@gmail.com',
+          provider: 'Google',
+          avatar: 'N',
+          createdAt: 'June 2026'
+        }
+      },
+      ui: {
+        isOnboarding: false,
+        modalOpen: null
+      }
+    };
+    localStorage.setItem('n-trace-state', JSON.stringify(state));
     localStorage.setItem('nitintrace_hasVisited', 'true');
     localStorage.setItem('nitintrace_onboarding_done', 'true');
-    localStorage.setItem('settings.geminiApiKey', 'dummy-key-for-testing');
   });
   await page.goto('/');
   // Wait for the app shell to mount
@@ -30,9 +53,9 @@ async function goToApp(page) {
  */
 async function goToLanding(page) {
   await page.addInitScript(() => {
+    localStorage.removeItem('n-trace-state');
     localStorage.removeItem('nitintrace_hasVisited');
     localStorage.setItem('nitintrace_onboarding_done', 'true');
-    localStorage.setItem('settings.geminiApiKey', 'dummy-key-for-testing');
   });
   await page.goto('/');
 }

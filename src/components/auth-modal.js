@@ -125,10 +125,18 @@ export function initAuthModal(container) {
                     <button class="btn btn-ghost toggle-key-visibility" title="Toggle visibility">👁️</button>
                   </div>
                 </div>
+
+                <div class="form-group">
+                  <label for="dash-explanation-lang">Explanation Language</label>
+                  <select id="dash-explanation-lang" class="form-input">
+                    <option value="english">English</option>
+                    <option value="hindi">Hindi / Hinglish</option>
+                  </select>
+                </div>
               </div>
 
               <div class="dashboard-actions-row">
-                <button class="btn btn-primary" id="btn-save-keys">Save Keys</button>
+                <button class="btn btn-primary" id="btn-save-keys">Save Settings</button>
               </div>
             </div>
 
@@ -189,6 +197,7 @@ export function initAuthModal(container) {
   const openaiInput = modalEl.querySelector('#dash-openai-key');
   const claudeInput = modalEl.querySelector('#dash-claude-key');
   const githubInput = modalEl.querySelector('#dash-github-token');
+  const explanationLangInput = modalEl.querySelector('#dash-explanation-lang');
   const btnSaveKeys = modalEl.querySelector('#btn-save-keys');
   const savedFilesContainer = modalEl.querySelector('#saved-files-container');
 
@@ -239,6 +248,7 @@ export function initAuthModal(container) {
     openaiInput.value = store.get('settings.openaiApiKey') || '';
     claudeInput.value = store.get('settings.claudeApiKey') || '';
     githubInput.value = store.get('github.token') || '';
+    explanationLangInput.value = store.get('settings.explanationLanguage') || 'english';
   };
 
   // Save keys action
@@ -247,12 +257,13 @@ export function initAuthModal(container) {
     store.set('settings.groqApiKey', groqInput.value.trim());
     store.set('settings.openaiApiKey', openaiInput.value.trim());
     store.set('settings.claudeApiKey', claudeInput.value.trim());
+    store.set('settings.explanationLanguage', explanationLangInput.value);
     
     const githubVal = githubInput.value.trim();
     store.set('github.token', githubVal);
     store.set('github.isAuthenticated', !!githubVal);
 
-    eventBus.emit('toast:show', { message: 'Keys and tokens saved locally!', type: 'success' });
+    eventBus.emit('toast:show', { message: 'Settings saved locally!', type: 'success' });
   });
 
   // Login Simulator Action
@@ -435,4 +446,13 @@ export function initAuthModal(container) {
       modalEl.style.display = 'none';
     }
   });
+
+  // Startup check: Prompt user to Sign In/Sign Up if they are not logged in
+  setTimeout(() => {
+    const isLoggedIn = store.get('auth.isLoggedIn') || false;
+    if (!isLoggedIn) {
+      store.set('ui.modalOpen', 'auth');
+      eventBus.emit('toast:show', { message: 'Welcome! Please Sign In or Sign Up to get started.', type: 'info' });
+    }
+  }, 800);
 }

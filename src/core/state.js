@@ -80,7 +80,8 @@ class StateStore {
         playbackSpeed: 1000,
         maxHistoryItems: 100,
         enableAnalytics: false,
-        enableErrorReporting: false
+        enableErrorReporting: false,
+        explanationLanguage: 'english'
       },
 
       // Auth state
@@ -302,7 +303,8 @@ class StateStore {
         playbackSpeed: 1000,
         maxHistoryItems: 100,
         enableAnalytics: false,
-        enableErrorReporting: false
+        enableErrorReporting: false,
+        explanationLanguage: 'english'
       },
       auth: {
         user: null,

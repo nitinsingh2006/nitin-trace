@@ -58,6 +58,14 @@ export function initSettingsModal(container) {
             <label for="model-select">Model</label>
             <select id="model-select" class="form-input"></select>
           </div>
+          
+          <div class="form-group">
+            <label for="explanation-lang-select">Explanation Language</label>
+            <select id="explanation-lang-select" class="form-input">
+              <option value="english">English</option>
+              <option value="hindi">Hindi / Hinglish</option>
+            </select>
+          </div>
         </div>
         <div class="modal-footer">
           <button class="btn btn-ghost" id="settings-cancel">Cancel</button>
@@ -84,6 +92,7 @@ export function initSettingsModal(container) {
   const groupOpenaiKey = modalEl.querySelector('#group-openai-key');
   const groupClaudeKey = modalEl.querySelector('#group-claude-key');
   const modelSelect = modalEl.querySelector('#model-select');
+  const explanationLangSelect = modalEl.querySelector('#explanation-lang-select');
 
   const btnClose = modalEl.querySelector('#settings-close');
   const btnCancel = modalEl.querySelector('#settings-cancel');
@@ -96,6 +105,7 @@ export function initSettingsModal(container) {
     groqKeyInput.value = store.get('settings.groqApiKey') || '';
     openaiKeyInput.value = store.get('settings.openaiApiKey') || '';
     claudeKeyInput.value = store.get('settings.claudeApiKey') || '';
+    explanationLangSelect.value = store.get('settings.explanationLanguage') || 'english';
 
     updateProviderFields();
   };
@@ -184,6 +194,7 @@ export function initSettingsModal(container) {
     store.set('settings.openaiApiKey', openaiKey);
     store.set('settings.claudeApiKey', claudeKey);
     store.set(`settings.${provider}Model`, model);
+    store.set('settings.explanationLanguage', explanationLangSelect.value);
 
     closeSettings();
 
@@ -210,13 +221,15 @@ export function initSettingsModal(container) {
 
   // Check if API keys are missing on boot to guide user
   setTimeout(() => {
-    const geminiKey = store.get('settings.geminiApiKey');
-    const groqKey = store.get('settings.groqApiKey');
-    const openaiKey = store.get('settings.openaiApiKey');
-    const claudeKey = store.get('settings.claudeApiKey');
-    if (!geminiKey && !groqKey && !openaiKey && !claudeKey) {
-      eventBus.emit('toast:show', { message: 'Welcome to NitinTrace! Setup your AI API Key to get started.', type: 'info' });
-      store.set('ui.settingsOpen', true);
+    if (store.get('auth.isLoggedIn')) {
+      const geminiKey = store.get('settings.geminiApiKey');
+      const groqKey = store.get('settings.groqApiKey');
+      const openaiKey = store.get('settings.openaiApiKey');
+      const claudeKey = store.get('settings.claudeApiKey');
+      if (!geminiKey && !groqKey && !openaiKey && !claudeKey) {
+        eventBus.emit('toast:show', { message: 'Welcome to NitinTrace! Setup your AI API Key to get started.', type: 'info' });
+        store.set('ui.settingsOpen', true);
+      }
     }
   }, 1000);
 }

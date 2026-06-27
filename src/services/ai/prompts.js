@@ -24,6 +24,8 @@ Follow these strict rules:
    - SYNTAX ERROR: Generate EXACTLY ONE step at the error line. Set explanation = description of the syntax error. Set variables = {}. Set console = the error message (e.g. "SyntaxError: Unexpected token").
    - RUNTIME ERROR: Trace normally up to the failing line. At that step, set explanation = description of the exception. Set console = the error + stack trace. Stop after that step.`;
 
+import store from '../../core/state.js';
+
 /**
  * Build the user-facing prompt for a trace request.
  * @param {string} code - Source code to trace
@@ -31,13 +33,22 @@ Follow these strict rules:
  * @returns {string}
  */
 export function buildUserPrompt(code, language) {
+  const explanationLanguage = store.get('settings.explanationLanguage') || 'english';
+  
+  let languageInstruction = '';
+  if (explanationLanguage === 'hindi') {
+    languageInstruction = '\n\nCRITICAL: You MUST write the "explanation" field of each step in Hinglish (a natural mix of Hindi and English written in Roman/English characters, e.g., "Yahan variable \'i\' ki value 0 se initialize ho rahi hai" or "Loop 5 baar chalega kyunki condition i < 5 true hai"). Do NOT use Devnagari script; write only in Hinglish using English alphabets. Keep explanations highly friendly, easy to understand, and developer-oriented.';
+  } else {
+    languageInstruction = '\n\nCRITICAL: You MUST write the "explanation" field of each step in clear, concise, developer-friendly English.';
+  }
+
   return `Trace the following ${language} code execution:
 
 \`\`\`${language}
 ${code}
 \`\`\`
 
-Start from the entry point (main function or first top-level statement). Evaluate all variable values accurately.`;
+Start from the entry point (main function or first top-level statement). Evaluate all variable values accurately.${languageInstruction}`;
 }
 
 /**

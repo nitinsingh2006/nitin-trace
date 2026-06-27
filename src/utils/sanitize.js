@@ -1,8 +1,8 @@
 const API_KEY_PATTERNS = {
-  gemini: /^AIza[0-9A-Za-z_-]{35}$/,
-  groq: /^gsk_[0-9A-Za-z]{32}$/,
-  openai: /^sk-[0-9A-Za-z]{20,}$/,
-  claude: /^sk-ant-[0-9A-Za-z]{20,}$/,
+  gemini: /^AIza[0-9A-Za-z_-]{30,}$/,
+  groq: /^gsk_[0-9A-Za-z_-]{30,}$/,
+  openai: /^sk-[0-9A-Za-z_-]{20,}$/,
+  claude: /^sk-ant-[0-9A-Za-z_-]{20,}$/,
 };
 
 export function sanitizeHtml(str) {
