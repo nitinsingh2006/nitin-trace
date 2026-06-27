@@ -1,0 +1,93 @@
+name: Release — NitinTrace
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build & Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for changelog
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run linter
+        run: npm run lint
+
+      - name: Run unit & integration tests
+        run: npm run test:coverage
+
+      - name: Build production bundle
+        run: npm run build
+        env:
+          VITE_ENABLE_PRO: 'false'
+
+      - name: Get tag version
+        id: tag
+        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+
+      - name: Generate changelog from commits
+        id: changelog
+        run: |
+          PREV_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
+          if [ -z "$PREV_TAG" ]; then
+            COMMITS=$(git log --oneline --no-merges --pretty=format:"- %s (%h)")
+          else
+            COMMITS=$(git log --oneline --no-merges --pretty=format:"- %s (%h)" "$PREV_TAG"..HEAD)
+          fi
+          echo "CHANGELOG<<EOF" >> $GITHUB_OUTPUT
+          echo "$COMMITS" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Package dist as archive
+        run: |
+          cd dist
+          zip -r ../nitintrace-${{ steps.tag.outputs.VERSION }}.zip .
+          cd ..
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.tag.outputs.VERSION }}
+          name: "NitinTrace ${{ steps.tag.outputs.VERSION }}"
+          body: |
+            ## What's Changed in ${{ steps.tag.outputs.VERSION }}
+
+            ${{ steps.changelog.outputs.CHANGELOG }}
+
+            ---
+
+            ### 📦 Assets
+            - `nitintrace-${{ steps.tag.outputs.VERSION }}.zip` — Production build bundle
+
+            ### 🚀 Live Demo
+            https://n-trace.vercel.app
+
+            ### 📖 Getting Started
+            1. Visit [n-trace.vercel.app](https://n-trace.vercel.app)
+            2. Paste your code or pick an example
+            3. Add your AI API key in Settings
+            4. Click **Trace** and watch it run step-by-step!
+          files: |
+            nitintrace-${{ steps.tag.outputs.VERSION }}.zip
+          draft: false
+          prerelease: ${{ contains(steps.tag.outputs.VERSION, '-') }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

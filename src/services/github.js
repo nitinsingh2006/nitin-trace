@@ -156,21 +156,22 @@ export async function pushCodeTrace(token, username, code, language, steps, repo
   const now  = new Date();
   const ymd  = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
   const hms  = `${String(now.getHours()).padStart(2, '0')}${String(now.getMinutes()).padStart(2, '0')}${String(now.getSeconds()).padStart(2, '0')}`;
-  
+
   // Use customFilename if provided, else default to timestamp
   let filename = customFilename.trim();
   if (!filename) {
     filename = `${ymd}_${hms}`;
   }
-  
+
   // Strip extension if entered manually
   if (filename.endsWith(`.${ext}`)) {
     filename = filename.slice(0, -(ext.length + 1));
   }
-  
+
   // Sanitize filename
+  // eslint-disable-next-line no-useless-escape
   filename = filename.replace(/[^a-zA-Z0-9_\-]/g, '_');
-  
+
   const filepath = `traces/${language}/${filename}.${ext}`;
   const header      = buildFileHeader(language, steps, now);
   const fileContent = header + code;
@@ -203,7 +204,7 @@ export async function pushCodeTrace(token, username, code, language, steps, repo
     throw new Error(body.message || `GitHub push failed (${res.status}).`);
   }
 
-  const data = await res.json();
+  await res.json();
   return {
     url: `https://github.com/${username}/${repoName}/blob/main/${filepath}`,
     repoUrl: `https://github.com/${username}/${repoName}`,
@@ -211,11 +212,11 @@ export async function pushCodeTrace(token, username, code, language, steps, repo
   };
 }
 
-/* ── Local session helpers ─────────────────────────────────── */
+/* ── Secure session helpers (sessionStorage for PAT) ─────── */
 
 export function getGitHubUser() {
   try {
-    const raw = localStorage.getItem('codetrace_github_user');
+    const raw = sessionStorage.getItem('nitintrace_github_user');
     return raw ? JSON.parse(raw) : null;
   } catch {
     return null;
@@ -223,15 +224,15 @@ export function getGitHubUser() {
 }
 
 export function getGitHubToken() {
-  return localStorage.getItem('codetrace_github_token') || '';
+  return sessionStorage.getItem('nitintrace_github_token') || '';
 }
 
 export function saveGitHubSession(token, user) {
-  localStorage.setItem('codetrace_github_token', token);
-  localStorage.setItem('codetrace_github_user', JSON.stringify(user));
+  sessionStorage.setItem('nitintrace_github_token', token);
+  sessionStorage.setItem('nitintrace_github_user', JSON.stringify(user));
 }
 
 export function clearGitHubSession() {
-  localStorage.removeItem('codetrace_github_token');
-  localStorage.removeItem('codetrace_github_user');
+  sessionStorage.removeItem('nitintrace_github_token');
+  sessionStorage.removeItem('nitintrace_github_user');
 }

@@ -1,39 +1,37 @@
 /**
- * CodeTrace — Playback & Execution Trace Engine
- * Coordinates state, timers, speed, active lines, and visualization updates.
+ * NitinTrace — Playback & Execution Trace Engine
+ *
+ * Coordinates trace playback store, step timers, active lines, and speeds.
+ * Uses the centralized reactive store store and event bus to communicate.
  */
 
-import { highlightActiveLine, clearActiveLineHighlight } from './editor';
-import { renderStep, setPlayIconState, resetVisualizer, setFinalOutput } from './visualizer';
+import store from '../core/state.js';
+import eventBus from '../core/events.js';
+import { highlightActiveLine, clearActiveLineHighlight } from './editor.js';
 
-let steps = [];
-let currentIndex = -1;
-let isPlaying = false;
 let playbackTimer = null;
-let speed = 1.0; // speed multiplier (0.5x to 3.0x)
 
 // Base delay in ms per step at 1x speed
-const BASE_STEP_DELAY = 2000;
+const BASE_STEP_DELAY = 1500;
 
 /**
- * Load a new trace history array and start playback
- * @param {Array} newSteps - The steps array from Gemini API
+ * Load a new trace array and start playback
+ * @param {Array} newSteps - The steps array from Gemini/Groq API
  */
 export function loadTrace(newSteps) {
   stopPlayback();
-  steps = newSteps || [];
-  
+
+  const steps = newSteps || [];
+  store.set('trace.steps', steps);
+  store.set('trace.error', null);
+
   if (steps.length === 0) {
-    resetVisualizer();
+    store.set('trace.currentIndex', -1);
     clearActiveLineHighlight();
     return;
   }
 
-  // Always show the complete program output from the last step
-  const lastStep = steps[steps.length - 1];
-  setFinalOutput(lastStep?.console || '');
-
-  currentIndex = 0;
+  // Set to initial step
   goToStep(0);
 }
 
@@ -42,36 +40,37 @@ export function loadTrace(newSteps) {
  * @param {number} index - target step index
  */
 export function goToStep(index) {
+  const steps = store.get('trace.steps') || [];
   if (steps.length === 0) return;
   if (index < 0 || index >= steps.length) return;
 
-  currentIndex = index;
-  const currentStep = steps[currentIndex];
+  store.set('trace.currentIndex', index);
+  const currentStep = steps[index];
 
   // Update Monaco Highlight
-  if (currentStep.line !== undefined) {
+  if (currentStep && currentStep.line !== undefined) {
     highlightActiveLine(currentStep.line);
   } else {
     clearActiveLineHighlight();
   }
-
-  // Render variables, explanations, console outputs
-  renderStep(currentStep, currentIndex, steps.length);
 }
 
 /**
  * Start execution play timer
  */
 export function startPlayback() {
-  if (steps.length === 0 || isPlaying) return;
+  const steps = store.get('trace.steps') || [];
+  let currentIndex = store.get('trace.currentIndex');
+
+  if (steps.length === 0 || store.get('trace.isPlaying')) return;
+
   if (currentIndex >= steps.length - 1) {
     // If at the end, restart from step 0
     currentIndex = 0;
+    store.set('trace.currentIndex', 0);
   }
 
-  isPlaying = true;
-  setPlayIconState(true);
-  
+  store.set('trace.isPlaying', true);
   runPlaybackLoop();
 }
 
@@ -79,8 +78,7 @@ export function startPlayback() {
  * Pause execution playback timer
  */
 export function pausePlayback() {
-  isPlaying = false;
-  setPlayIconState(false);
+  store.set('trace.isPlaying', false);
   if (playbackTimer) {
     clearTimeout(playbackTimer);
     playbackTimer = null;
@@ -88,10 +86,10 @@ export function pausePlayback() {
 }
 
 /**
- * Toggles play/pause state
+ * Toggles play/pause store
  */
 export function togglePlayback() {
-  if (isPlaying) {
+  if (store.get('trace.isPlaying')) {
     pausePlayback();
   } else {
     startPlayback();
@@ -103,25 +101,31 @@ export function togglePlayback() {
  */
 export function stopPlayback() {
   pausePlayback();
-  steps = [];
-  currentIndex = -1;
+  store.set('trace.isPlaying', false);
+  store.set('trace.steps', []);
+  store.set('trace.currentIndex', -1);
+  clearActiveLineHighlight();
 }
 
 /**
  * Internal loop runner for play timeout sequence
  */
 function runPlaybackLoop() {
-  if (!isPlaying) return;
+  if (!store.get('trace.isPlaying')) return;
 
+  const speed = store.get('settings.speed') || 1.0;
   const delay = BASE_STEP_DELAY / speed;
 
   playbackTimer = setTimeout(() => {
+    const steps = store.get('trace.steps') || [];
+    const currentIndex = store.get('trace.currentIndex');
+
     if (currentIndex < steps.length - 1) {
       stepForward();
       runPlaybackLoop();
     } else {
       pausePlayback();
-      window.showToast('Execution trace complete!', 'success');
+      eventBus.emit('toast:show', { message: 'Execution trace complete!', type: 'success' });
     }
   }, delay);
 }
@@ -130,6 +134,8 @@ function runPlaybackLoop() {
  * Move forward 1 step
  */
 export function stepForward() {
+  const steps = store.get('trace.steps') || [];
+  const currentIndex = store.get('trace.currentIndex');
   if (currentIndex < steps.length - 1) {
     goToStep(currentIndex + 1);
   }
@@ -139,6 +145,7 @@ export function stepForward() {
  * Move backward 1 step
  */
 export function stepBackward() {
+  const currentIndex = store.get('trace.currentIndex');
   if (currentIndex > 0) {
     goToStep(currentIndex - 1);
   }
@@ -148,6 +155,7 @@ export function stepBackward() {
  * Jump to first step
  */
 export function jumpToStart() {
+  const steps = store.get('trace.steps') || [];
   if (steps.length > 0) {
     goToStep(0);
   }
@@ -157,44 +165,31 @@ export function jumpToStart() {
  * Jump to last step
  */
 export function jumpToEnd() {
+  const steps = store.get('trace.steps') || [];
   if (steps.length > 0) {
     goToStep(steps.length - 1);
   }
 }
 
 /**
- * Update the playback speed and dynamically adjust active timer
- * @param {number} newSpeed - speed multiplier (e.g. 0.5, 1.5, 3.0)
- */
-export function setPlaybackSpeed(newSpeed) {
-  speed = parseFloat(newSpeed) || 1.0;
-  if (isPlaying) {
-    // Refresh timer immediately with new speed
-    if (playbackTimer) {
-      clearTimeout(playbackTimer);
-    }
-    runPlaybackLoop();
-  }
-}
-
-/**
- * Check if the engine is currently loaded with trace steps
- */
-export function hasTraceLoaded() {
-  return steps.length > 0;
-}
-
-/**
- * Check if playback is active
- */
-export function isCurrentlyPlaying() {
-  return isPlaying;
-}
-
-/**
  * Get current trace steps
  */
 export function getTraceSteps() {
-  return steps;
+  return store.get('trace.steps') || [];
 }
 
+// ─── Event Bus Listeners ──────────────────────────────────────────────────
+
+eventBus.on('playback:toggle', togglePlayback);
+eventBus.on('playback:prev', stepBackward);
+eventBus.on('playback:next', stepForward);
+eventBus.on('playback:restart', jumpToStart);
+eventBus.on('playback:end', jumpToEnd);
+
+eventBus.on('history:restore', (steps) => {
+  loadTrace(steps);
+});
+
+eventBus.on('trace:reset', () => {
+  stopPlayback();
+});

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="750" height="1334" viewBox="0 0 750 1334">
+  <rect width="750" height="1334" fill="#0a0a1a"/>
+  <!-- Header -->
+  <rect x="0" y="0" width="750" height="56" fill="#12122a"/>
+  <text x="20" y="36" font-family="monospace" font-size="18" fill="#00f0ff" font-weight="bold">NitinTrace</text>
+  <!-- Editor -->
+  <rect x="12" y="64" width="726" height="400" rx="10" fill="#14142a" stroke="#2a2a4a" stroke-width="1"/>
+  <rect x="12" y="64" width="726" height="36" rx="10" fill="#1a1a34"/>
+  <text x="24" y="88" font-family="sans-serif" font-size="13" fill="#888">✏️ Code Input</text>
+  <rect x="24" y="108" width="702" height="320" rx="6" fill="#0d0d1e"/>
+  <text x="40" y="140" font-family="monospace" font-size="12" fill="#636">1</text>
+  <text x="56" y="140" font-family="monospace" font-size="12" fill="#8cf">function</text>
+  <text x="120" y="140" font-family="monospace" font-size="12" fill="#8cf">bubbleSort(arr) {</text>
+  <text x="40" y="165" font-family="monospace" font-size="12" fill="#636">2</text>
+  <text x="72" y="165" font-family="monospace" font-size="12" fill="#e8e">for</text>
+  <text x="104" y="165" font-family="monospace" font-size="12" fill="#e8e">(let i = 0; ...) {</text>
+  <!-- Visualizer -->
+  <rect x="12" y="480" width="726" height="500" rx="10" fill="#14142a" stroke="#2a2a4a" stroke-width="1"/>
+  <rect x="12" y="480" width="726" height="36" rx="10" fill="#1a1a34"/>
+  <text x="24" y="504" font-family="sans-serif" font-size="13" fill="#888">🔍 Execution Trace</text>
+  <text x="690" y="504" font-family="sans-serif" font-size="11" fill="#888">Step 4/8</text>
+  <rect x="24" y="524" width="702" height="3" rx="1.5" fill="#2a2a4a"/>
+  <rect x="24" y="524" width="351" height="3" rx="1.5" fill="#00f0ff"/>
+  <rect x="24" y="540" width="702" height="70" rx="6" fill="#1a1a34"/>
+  <text x="36" y="558" font-family="sans-serif" font-size="12" fill="#00f0ff">💬 Comparing arr[2] (5) and arr[3] (2)</text>
+  <text x="36" y="578" font-family="sans-serif" font-size="11" fill="#aaa">5 &gt; 2, so they will be swapped.</text>
+  <rect x="24" y="622" width="702" height="150" rx="6" fill="#1a1a34"/>
+  <text x="36" y="640" font-family="sans-serif" font-size="12" fill="#00f0ff">📊 Variables</text>
+  <text x="36" y="670" font-family="monospace" font-size="11" fill="#8cf">arr</text>
+  <text x="120" y="670" font-family="monospace" font-size="11" fill="#ccc">[5, 3, 2, 1, 4]</text>
+  <text x="36" y="694" font-family="monospace" font-size="11" fill="#8cf">i</text>
+  <text x="120" y="694" font-family="monospace" font-size="11" fill="#f80">0</text>
+  <text x="36" y="718" font-family="monospace" font-size="11" fill="#8cf">j</text>
+  <text x="120" y="718" font-family="monospace" font-size="11" fill="#f80">2</text>
+  <rect x="24" y="784" width="702" height="100" rx="6" fill="#1a1a34"/>
+  <text x="36" y="802" font-family="sans-serif" font-size="12" fill="#00f0ff">🖥️ Console</text>
+  <text x="36" y="826" font-family="monospace" font-size="11" fill="#aaa">Swapping 5 and 3</text>
+  <text x="36" y="846" font-family="monospace" font-size="11" fill="#aaa">Swapping 5 and 2</text>
+</svg>

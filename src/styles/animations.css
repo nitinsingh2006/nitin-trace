@@ -1,0 +1,102 @@
+/* ============================================
+   Animations & Spinners
+   ============================================ */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+@keyframes logo-glow {
+  from {
+    filter: drop-shadow(0 0 2px rgba(0, 240, 255, 0.3));
+  }
+  to {
+    filter: drop-shadow(0 0 10px rgba(139, 92, 246, 0.5));
+  }
+}
+
+@keyframes var-update-flash {
+  0% {
+    background-color: rgba(0, 240, 255, 0.25);
+    color: #fff;
+    border-radius: 4px;
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modal-enter {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.spinner {
+  width: 28px;
+  height: 28px;
+  border: 2px solid rgba(255, 255, 255, 0.05);
+  border-top-color: var(--accent-cyan);
+  border-radius: 50%;
+  animation: spin 0.8s cubic-bezier(0.5, 0.1, 0.5, 0.9) infinite;
+}
+
+/* Scrollbar customization */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 99px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+/* Responsive Overrides */
+@media (max-width: 900px) {
+  .app-main {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+  
+  .panel-editor {
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+  }
+}
+
+@keyframes codetrace-line-glow {
+  0% {
+    background: rgba(0, 240, 255, 0.08);
+    box-shadow: inset 10px 0 20px rgba(0, 240, 255, 0.03);
+  }
+  100% {
+    background: rgba(0, 240, 255, 0.16);
+    box-shadow: inset 10px 0 20px rgba(0, 240, 255, 0.08), 0 0 12px rgba(0, 240, 255, 0.15);
+  }
+}

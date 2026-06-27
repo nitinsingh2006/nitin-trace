@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://n-trace.vercel.app/sitemap.xml
+
+# Disallow admin/internal paths (future-proofing)
+Disallow: /api/
+Disallow: /.well-known/
+
+# Crawl-delay for polite bots
+Crawl-delay: 1

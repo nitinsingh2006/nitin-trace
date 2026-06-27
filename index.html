@@ -2,29 +2,93 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- SEO -->
-    <title>NitinTrace — See Your Code Think | AI Execution Visualizer</title>
-    <meta name="description" content="Paste any code in any language and watch it execute step-by-step with beautiful animations. AI-powered execution simulation — no runtime needed." />
-    <meta name="keywords" content="code visualizer, execution trace, AI debugging, code animation, step-by-step code" />
+    <!-- Primary Meta -->
+    <title>NitinTrace — AI-Powered Code Execution Visualizer</title>
+    <meta name="description" content="Understand your code step-by-step with Claude AI. Visualize variables, call stacks, and program flow in real-time. Supports 17+ programming languages." />
+    <meta name="keywords" content="code visualizer, execution trace, AI debugger, learning tool, code animation, claude ai, programming education, algorithm visualizer, step-by-step code" />
+    <meta name="author" content="Nitin Singh" />
+    <meta name="theme-color" content="#00f0ff" />
 
-    <!-- Open Graph -->
-    <meta property="og:title" content="NitinTrace — See Your Code Think" />
-    <meta property="og:description" content="AI-powered code execution visualizer. Paste code, watch it run step-by-step." />
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://n-trace.vercel.app/" />
+    <meta property="og:title" content="NitinTrace — AI-Powered Code Execution Visualizer" />
+    <meta property="og:description" content="Paste any code, pick a language, and watch AI trace every variable, call stack, and output — step-by-step. No runtime needed." />
+    <meta property="og:image" content="https://n-trace.vercel.app/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="NitinTrace — AI Code Execution Visualizer screenshot" />
+    <meta property="og:site_name" content="NitinTrace" />
 
-    <!-- Fonts -->
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@nitinsingh2006" />
+    <meta name="twitter:creator" content="@nitinsingh2006" />
+    <meta name="twitter:url" content="https://n-trace.vercel.app/" />
+    <meta name="twitter:title" content="NitinTrace — AI-Powered Code Execution Visualizer" />
+    <meta name="twitter:description" content="Paste any code, pick a language, and watch AI trace every variable, call stack, and output — step-by-step. No runtime needed." />
+    <meta name="twitter:image" content="https://n-trace.vercel.app/og-image.png" />
+    <meta name="twitter:image:alt" content="NitinTrace — AI Code Execution Visualizer screenshot" />
+
+    <!-- PWA & Favicons -->
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png" />
+    <link rel="apple-touch-icon" href="/favicon-192.png" />
+
+    <!-- Fonts (preconnect for performance) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
-    <!-- Monaco Editor Loader -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/loader.min.js"></script>
+    <!-- Monaco Editor Loader (loaded via editor service — kept here for compatibility) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/loader.min.js"
+      integrity="sha512-ZG31AN9z/CQD1YDDAK4RUAvogwbJHv6bHrumrnMLzdCrVu4HeAqrUX7Jsal/cbUwXGfaMUNmQU04tQ8XXl5Znw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer">
+    </script>
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "NitinTrace",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "description": "AI-powered code execution visualizer. Paste any code, pick a language, and watch AI trace every variable, call stack, and output step-by-step. Supports 17+ programming languages. Powered by Gemini, Groq, OpenAI, and Claude.",
+      "url": "https://n-trace.vercel.app",
+      "author": {
+        "@type": "Person",
+        "name": "Nitin Singh"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "ratingCount": "1"
+      }
+    }
+    </script>
   </head>
   <body>
+    <a href="#app" class="skip-to-content" style="position:absolute;left:-9999px;top:0;z-index:9999;padding:0.5rem 1rem;background:var(--accent-cyan,#00f0ff);color:#000;font-weight:600;text-decoration:none;">Skip to content</a>
     <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
+    <script>
+      // Make skip link visible on focus
+      document.querySelector('.skip-to-content')?.addEventListener('focus', function(){ this.style.left = '0'; });
+      document.querySelector('.skip-to-content')?.addEventListener('blur', function(){ this.style.left = '-9999px'; });
+    </script>
   </body>
 </html>

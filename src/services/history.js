@@ -4,9 +4,9 @@
  * so they can be re-run, searched, and managed.
  */
 
-import { uid } from '../utils/helpers';
+import { uid } from '../utils/helpers.js';
 
-const DB_NAME = 'codetrace_db';
+const DB_NAME = 'nitintrace_db';
 const DB_VERSION = 1;
 const STORE_NAME = 'history';
 

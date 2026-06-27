@@ -4,7 +4,7 @@
  * themes, and execution line highlighting.
  */
 
-import { LANGUAGES } from '../utils/constants';
+import { LANGUAGES } from '../utils/constants.js';
 
 let editorInstance = null;
 let currentDecorations = [];
@@ -42,7 +42,7 @@ export function loadMonaco() {
 export async function initEditor(container, initialLanguage) {
   try {
     const monaco = await loadMonaco();
-    
+
     // Define custom dark cyber theme matching style.css design tokens
     monaco.editor.defineTheme('codetrace-theme', {
       base: 'vs-dark',
@@ -120,14 +120,14 @@ export function setEditorLanguage(languageId) {
   if (!editorInstance) return;
   const monaco = window.monaco;
   const model = editorInstance.getModel();
-  
+
   // Set language model
   monaco.editor.setModelLanguage(model, languageId);
-  
+
   // Update value with sample code
   const sample = LANGUAGES[languageId]?.sample || '';
   editorInstance.setValue(sample);
-  
+
   // Clear any existing active line highlights
   clearActiveLineHighlight();
 }
@@ -137,7 +137,7 @@ export function setEditorLanguage(languageId) {
  */
 export function highlightActiveLine(lineNumber) {
   if (!editorInstance) return;
-  
+
   // Clear old decorations
   clearActiveLineHighlight();
 

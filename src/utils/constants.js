@@ -1,10 +1,11 @@
+/* eslint-disable no-useless-escape */
 /**
- * NitinTrace — Constants
- * Central config for the app
+ * NitinTrace — Language Constants & Sample Code
+ * Use CONFIG (from @core/config.js) for runtime configuration.
  */
 
 export const APP_NAME = 'NitinTrace';
-export const APP_VERSION = '0.1.0';
+export const APP_VERSION = '1.0.0';
 
 /**
  * Supported languages with their Monaco Editor language IDs
@@ -370,16 +371,61 @@ echo "=== Done ==="`,
 export const DEFAULTS = {
   language: 'javascript',
   speed: 1,
-  model: 'gemini-2.0-flash',
+  provider: 'gemini',
+  geminiModel: 'gemini-2.0-flash',
+  groqModel: 'llama-3.3-70b-versatile',
+  openaiModel: 'gpt-4o',
+  claudeModel: 'claude-sonnet-4-20250514',
 };
 
 /**
- * Storage keys
+ * localStorage / sessionStorage key names — single source of truth.
+ * Actual storage now handled by the state store (@core/state.js).
+ * These are kept for backward-compat reference only.
  */
 export const STORAGE_KEYS = {
-  API_KEY: 'codetrace_api_key',
-  MODEL: 'codetrace_model',
-  LANGUAGE: 'codetrace_language',
-  SPEED: 'codetrace_speed',
-  HISTORY: 'codetrace_history',
+  // Settings (localStorage)
+  PROVIDER:       'nitintrace_settings.provider',
+  GEMINI_MODEL:   'nitintrace_settings.geminiModel',
+  GROQ_MODEL:     'nitintrace_settings.groqModel',
+  OPENAI_MODEL:   'nitintrace_settings.openaiModel',
+  CLAUDE_MODEL:   'nitintrace_settings.claudeModel',
+  LANGUAGE:       'nitintrace_settings.language',
+  SPEED:          'nitintrace_settings.speed',
+  // API keys (sessionStorage — cleared on tab close)
+  GEMINI_API_KEY: 'nitintrace_settings.geminiApiKey',
+  GROQ_API_KEY:   'nitintrace_settings.groqApiKey',
+  OPENAI_API_KEY: 'nitintrace_settings.openaiApiKey',
+  CLAUDE_API_KEY: 'nitintrace_settings.claudeApiKey',
+  // GitHub (sessionStorage)
+  GITHUB_TOKEN:    'nitintrace_github.token',
+  GITHUB_USERNAME: 'nitintrace_github.username',
+  GITHUB_AVATAR:   'nitintrace_github.avatar',
+  // UI
+  ONBOARDING_DONE: 'nitintrace_onboarding_done',
+  THEME:           'nitintrace_theme',
 };
+
+/**
+ * File extensions per language (for GitHub push filenames).
+ */
+export const EXTENSIONS = {
+  javascript: 'js',
+  typescript: 'ts',
+  python:     'py',
+  java:       'java',
+  cpp:        'cpp',
+  c:          'c',
+  csharp:     'cs',
+  go:         'go',
+  rust:       'rs',
+  kotlin:     'kt',
+  swift:      'swift',
+  ruby:       'rb',
+  php:        'php',
+  dart:       'dart',
+  scala:      'scala',
+  bash:       'sh',
+  r:          'r',
+};
+

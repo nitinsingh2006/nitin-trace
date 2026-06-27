@@ -1,0 +1,419 @@
+/* ==========================================================================
+   NitinTrace — Auth Modal & Dashboard Stylesheet
+   ========================================================================== */
+
+/* Card Styling Override for Auth */
+.auth-card {
+  max-width: 480px;
+  width: 90%;
+  background: var(--bg-surface-solid, #0d0d1e);
+  border: 1px solid var(--border-color, #1f1f3a);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 240, 255, 0.05);
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  padding: 0;
+}
+
+/* Auth Header */
+.auth-header {
+  padding: 2.5rem 2rem 1.5rem;
+  text-align: center;
+}
+
+.auth-logo {
+  font-size: 2.5rem;
+  color: var(--accent-cyan, #00f0ff);
+  margin-bottom: 0.75rem;
+  text-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+  animation: pulse-glow 2.5s infinite ease-in-out;
+}
+
+.auth-card h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-primary, #e0e0f0);
+  margin-bottom: 0.5rem;
+}
+
+.auth-subtitle {
+  font-size: 0.88rem;
+  color: var(--text-secondary, #9a9ab0);
+  line-height: 1.4;
+}
+
+/* Auth Body */
+.auth-body {
+  padding: 0 2rem 2.5rem;
+}
+
+/* Social Buttons */
+.auth-social-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.btn-social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-primary, #e0e0f0);
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-social:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+.social-icon {
+  font-weight: bold;
+  opacity: 0.85;
+}
+
+#btn-auth-google .social-icon {
+  color: #ea4335;
+  text-shadow: 0 0 1px rgba(234, 67, 53, 0.5);
+}
+
+#btn-auth-github .social-icon {
+  color: #f0f0f0;
+}
+
+#btn-auth-x .social-icon {
+  color: #ffffff;
+  font-size: 1.1rem;
+}
+
+/* Divider */
+.auth-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 1.5rem 0;
+  color: var(--text-muted, #5e5e7a);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.auth-divider:not(:empty)::before {
+  margin-right: .75em;
+}
+
+.auth-divider:not(:empty)::after {
+  margin-left: .75em;
+}
+
+/* Local Auth Form */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.auth-submit-btn {
+  width: 100%;
+  padding: 0.85rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+/* ==========================================================================
+   DASHBOARD VIEW
+   ========================================================================== */
+
+.dashboard-header {
+  padding: 2rem 2rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(0, 240, 255, 0.01);
+}
+
+.user-profile-summary {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.user-avatar-large {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-cyan, #00f0ff), var(--accent-purple, #8b5cf6));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #000000;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+}
+
+.user-profile-meta h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-primary, #e0e0f0);
+  margin-bottom: 0.15rem;
+}
+
+.user-profile-meta p {
+  font-size: 0.85rem;
+  color: var(--text-secondary, #9a9ab0);
+  margin-bottom: 0.4rem;
+}
+
+.badge-provider {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  background: rgba(0, 240, 255, 0.1);
+  color: var(--accent-cyan, #00f0ff);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+}
+
+/* Tabs */
+.dashboard-tabs {
+  display: flex;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 0 1.5rem;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted, #5e5e7a);
+  padding: 1rem 0.75rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.2s;
+  margin-right: 1.25rem;
+}
+
+.tab-btn:hover {
+  color: var(--text-secondary, #9a9ab0);
+}
+
+.tab-btn.active {
+  color: var(--accent-cyan, #00f0ff);
+  font-weight: 600;
+}
+
+.tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--accent-cyan, #00f0ff);
+  box-shadow: 0 0 8px rgba(0, 240, 255, 0.5);
+}
+
+.tab-content {
+  display: none;
+  padding: 1.5rem;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* Key inputs styling inside dashboard */
+.keys-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.input-with-button {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.input-with-button .form-input {
+  flex: 1;
+}
+
+.input-with-button .btn {
+  padding: 0.5rem 0.75rem;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.dashboard-actions-row {
+  margin-top: 1.25rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Saved files tab styling */
+.saved-files-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.saved-file-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  transition: all 0.2s ease;
+}
+
+.saved-file-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.file-info-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.file-name-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.file-lang-icon {
+  font-size: 0.95rem;
+}
+
+.file-name-title {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-primary, #e0e0f0);
+}
+
+.file-meta-row {
+  font-size: 0.75rem;
+  color: var(--text-muted, #5e5e7a);
+}
+
+.file-date {
+  color: var(--text-secondary, #9a9ab0);
+}
+
+.file-actions-col {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.file-actions-col .btn {
+  padding: 0.35rem 0.65rem;
+  font-size: 0.75rem;
+  border-radius: 6px;
+  height: 28px;
+}
+
+.btn-danger-hover:hover {
+  background: rgba(239, 68, 68, 0.1) !important;
+  color: #ef4444 !important;
+  border-color: rgba(239, 68, 68, 0.2) !important;
+}
+
+/* Empty states */
+.empty-files-state {
+  text-align: center;
+  padding: 2.5rem 1rem;
+}
+
+.empty-icon {
+  display: block;
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+  opacity: 0.5;
+}
+
+.empty-files-state p {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text-primary, #e0e0f0);
+  margin-bottom: 0.15rem;
+}
+
+.empty-subtitle {
+  font-size: 0.75rem;
+  color: var(--text-muted, #5e5e7a);
+}
+
+/* Dashboard Footer */
+.dashboard-footer {
+  padding: 1.25rem 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.footer-meta {
+  font-size: 0.75rem;
+  color: var(--text-muted, #5e5e7a);
+}
+
+.btn-danger-outline {
+  background: transparent;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #ef4444;
+  padding: 0.45rem 0.85rem;
+  font-size: 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 500;
+}
+
+.btn-danger-outline:hover {
+  background: #ef4444;
+  color: #ffffff;
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
+}
+
+/* Loading Spinner inside lists */
+.spinner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 0;
+  gap: 0.5rem;
+  color: var(--text-muted, #5e5e7a);
+  font-size: 0.8rem;
+}
+
+/* Keyframes */
+@keyframes pulse-glow {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.05); opacity: 1; text-shadow: 0 0 25px rgba(0, 240, 255, 0.55); }
+}

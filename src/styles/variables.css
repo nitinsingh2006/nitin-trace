@@ -1,0 +1,58 @@
+/**
+ * CodeTrace — Design System & Custom CSS Rules
+ * 
+ * Includes:
+ * - Cyberpunk-inspired modern dark theme
+ * - Neon glow tokens & HSL gradient systems
+ * - Glassmorphism UI panel mixins
+ * - High-end micro-animations & layout structures
+ */
+
+/* ============================================
+   Design Tokens
+   ============================================ */
+:root {
+  /* Brand Colors & Accent Gradients */
+  --accent-cyan: #00f0ff;
+  --accent-cyan-rgb: 0, 240, 255;
+  --accent-purple: #8b5cf6;
+  --accent-purple-rgb: 139, 92, 246;
+  --accent-pink: #ec4899;
+  --accent-pink-rgb: 236, 72, 153;
+  
+  /* Theme Colors (Deep Cyber Space) */
+  --bg-deep: #05050f;
+  --bg-primary: #0a0a1a;
+  --bg-secondary: #111129;
+  --bg-surface: rgba(22, 22, 49, 0.6);
+  --bg-surface-hover: rgba(33, 33, 70, 0.8);
+  --bg-surface-solid: #151533;
+  --bg-active: rgba(0, 240, 255, 0.08);
+  
+  /* Borders & Highlights */
+  --border-color: rgba(255, 255, 255, 0.06);
+  --border-hover: rgba(0, 240, 255, 0.2);
+  --border-glow: rgba(0, 240, 255, 0.1);
+  --border-purple: rgba(139, 92, 246, 0.2);
+
+  /* Typography */
+  --font-ui: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  
+  /* Text states */
+  --text-primary: #f3f4f6;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
+  --text-accent: #00f0ff;
+  
+  /* Glows & Shadows */
+  --shadow-neon: 0 0 15px rgba(0, 240, 255, 0.25);
+  --shadow-neon-lg: 0 0 30px rgba(0, 240, 255, 0.4);
+  --shadow-purple: 0 0 15px rgba(139, 92, 246, 0.25);
+  --shadow-panel: 0 12px 40px -10px rgba(0, 0, 0, 0.6);
+  
+  /* Transitions */
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
