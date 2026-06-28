@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#0a0a1a"/>
+  <!-- Header bar -->
+  <rect x="0" y="0" width="1280" height="56" fill="#12122a" rx="0"/>
+  <text x="24" y="36" font-family="monospace" font-size="20" fill="#00f0ff" font-weight="bold">N-Trace</text>
+  <!-- Editor panel -->
+  <rect x="16" y="72" width="600" height="620" rx="12" fill="#14142a" stroke="#2a2a4a" stroke-width="1"/>
+  <rect x="16" y="72" width="600" height="40" rx="12" fill="#1a1a34"/>
+  <text x="32" y="98" font-family="sans-serif" font-size="14" fill="#888">✏️ Code Input</text>
+  <rect x="32" y="120" width="568" height="520" rx="8" fill="#0d0d1e" stroke="#1e1e3a" stroke-width="1"/>
+  <!-- Code lines -->
+  <text x="48" y="155" font-family="monospace" font-size="13" fill="#636">1</text>
+  <text x="64" y="155" font-family="monospace" font-size="13" fill="#e8e">function</text>
+  <text x="124" y="155" font-family="monospace" font-size="13" fill="#8cf"> bubbleSort</text>
+  <text x="208" y="155" font-family="monospace" font-size="13" fill="#e8e">(arr) {</text>
+  <text x="48" y="180" font-family="monospace" font-size="13" fill="#636">2</text>
+  <text x="80" y="180" font-family="monospace" font-size="13" fill="#e8e">for</text>
+  <text x="112" y="180" font-family="monospace" font-size="13" fill="#e8e">(let i = 0; ...) {</text>
+  <text x="48" y="205" font-family="monospace" font-size="13" fill="#636">3</text>
+  <text x="112" y="205" font-family="monospace" font-size="13" fill="#e8e">for</text>
+  <text x="144" y="205" font-family="monospace" font-size="13" fill="#e8e">(let j = 0; ...) {</text>
+  <!-- Highlighted line -->
+  <rect x="32" y="215" width="568" height="24" rx="4" fill="rgba(0,240,255,0.1)"/>
+  <text x="48" y="233" font-family="monospace" font-size="13" fill="#f80">4</text>
+  <text x="160" y="233" font-family="monospace" font-size="13" fill="#fff">if (arr[j] > arr[j+1]) {</text>
+  <text x="48" y="258" font-family="monospace" font-size="13" fill="#636">5</text>
+  <text x="176" y="258" font-family="monospace" font-size="13" fill="#e8e">let temp = arr[j];</text>
+  <!-- Visualizer panel -->
+  <rect x="640" y="72" width="620" height="620" rx="12" fill="#14142a" stroke="#2a2a4a" stroke-width="1"/>
+  <rect x="640" y="72" width="620" height="40" rx="12" fill="#1a1a34"/>
+  <text x="656" y="98" font-family="sans-serif" font-size="14" fill="#888">🔍 Execution Trace — Step 4 / 8</text>
+  <!-- Progress bar -->
+  <rect x="656" y="116" width="588" height="4" rx="2" fill="#2a2a4a"/>
+  <rect x="656" y="116" width="294" height="4" rx="2" fill="#00f0ff"/>
+  <!-- Explanation -->
+  <rect x="656" y="136" width="588" height="80" rx="8" fill="#1a1a34" stroke="#2a2a4a" stroke-width="1"/>
+  <text x="672" y="158" font-family="sans-serif" font-size="13" fill="#00f0ff" font-weight="600">💬 What's happening</text>
+  <text x="672" y="180" font-family="sans-serif" font-size="13" fill="#ccc">Comparing arr[2] (5) and arr[3] (2) in the inner loop.</text>
+  <!-- Variables table -->
+  <rect x="656" y="232" width="588" height="180" rx="8" fill="#1a1a34" stroke="#2a2a4a" stroke-width="1"/>
+  <text x="672" y="254" font-family="sans-serif" font-size="13" fill="#00f0ff" font-weight="600">📊 Variables</text>
+  <line x1="672" y1="268" x2="1228" y2="268" stroke="#2a2a4a" stroke-width="1"/>
+  <text x="672" y="290" font-family="monospace" font-size="12" fill="#888">Variable</text>
+  <text x="800" y="290" font-family="monospace" font-size="12" fill="#888">Type</text>
+  <text x="920" y="290" font-family="monospace" font-size="12" fill="#888">Value</text>
+  <text x="672" y="316" font-family="monospace" font-size="12" fill="#8cf">arr</text>
+  <text x="800" y="316" font-family="monospace" font-size="12" fill="#888">Array</text>
+  <text x="920" y="316" font-family="monospace" font-size="12" fill="#ccc">[5, 3, 2, 1, 4]</text>
+  <text x="672" y="342" font-family="monospace" font-size="12" fill="#8cf">i</text>
+  <text x="800" y="342" font-family="monospace" font-size="12" fill="#888">Number</text>
+  <text x="920" y="342" font-family="monospace" font-size="12" fill="#f80">0</text>
+  <text x="672" y="368" font-family="monospace" font-size="12" fill="#8cf">j</text>
+  <text x="800" y="368" font-family="monospace" font-size="12" fill="#888">Number</text>
+  <text x="920" y="368" font-family="monospace" font-size="12" fill="#f80">2</text>
+  <!-- Console -->
+  <rect x="656" y="428" width="588" height="120" rx="8" fill="#1a1a34" stroke="#2a2a4a" stroke-width="1"/>
+  <text x="672" y="450" font-family="sans-serif" font-size="13" fill="#00f0ff" font-weight="600">🖥️ Console Output</text>
+  <text x="672" y="478" font-family="monospace" font-size="12" fill="#aaa">Starting bubble sort...</text>
+  <text x="672" y="498" font-family="monospace" font-size="12" fill="#aaa">Pass 1: swapping 5 and 3</text>
+  <text x="672" y="518" font-family="monospace" font-size="12" fill="#aaa">Pass 1: swapping 5 and 2</text>
+  <!-- Footer -->
+  <rect x="0" y="708" width="1280" height="12" fill="#0a0a1a"/>
+  <circle cx="16" cy="714" r="3" fill="#00f0ff"/>
+</svg>

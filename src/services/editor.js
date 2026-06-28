@@ -1,10 +1,10 @@
 /**
- * CodeTrace — Monaco Editor Service
+ * N-Trace — Monaco Editor Service
  * Handles initialization, loading, formatting, language change,
  * themes, and execution line highlighting.
  */
 
-import { LANGUAGES } from '../utils/constants';
+import { LANGUAGES } from '../utils/constants.js';
 
 let editorInstance = null;
 let currentDecorations = [];
@@ -42,9 +42,9 @@ export function loadMonaco() {
 export async function initEditor(container, initialLanguage) {
   try {
     const monaco = await loadMonaco();
-    
+
     // Define custom dark cyber theme matching style.css design tokens
-    monaco.editor.defineTheme('codetrace-theme', {
+    monaco.editor.defineTheme('ntrace-theme', {
       base: 'vs-dark',
       inherit: true,
       rules: [
@@ -79,7 +79,7 @@ export async function initEditor(container, initialLanguage) {
     editorInstance = monaco.editor.create(container, {
       value: sampleCode,
       language: initialLanguage,
-      theme: 'codetrace-theme',
+      theme: 'ntrace-theme',
       automaticLayout: true,
       fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
       fontSize: 13,
@@ -120,14 +120,14 @@ export function setEditorLanguage(languageId) {
   if (!editorInstance) return;
   const monaco = window.monaco;
   const model = editorInstance.getModel();
-  
+
   // Set language model
   monaco.editor.setModelLanguage(model, languageId);
-  
+
   // Update value with sample code
   const sample = LANGUAGES[languageId]?.sample || '';
   editorInstance.setValue(sample);
-  
+
   // Clear any existing active line highlights
   clearActiveLineHighlight();
 }
@@ -137,7 +137,7 @@ export function setEditorLanguage(languageId) {
  */
 export function highlightActiveLine(lineNumber) {
   if (!editorInstance) return;
-  
+
   // Clear old decorations
   clearActiveLineHighlight();
 
@@ -154,7 +154,7 @@ export function highlightActiveLine(lineNumber) {
       range: new window.monaco.Range(lineNumber, 1, lineNumber, 1),
       options: {
         isWholeLine: true,
-        className: 'codetrace-active-line-decor'
+        className: 'ntrace-active-line-decor'
       }
     }
   ]);

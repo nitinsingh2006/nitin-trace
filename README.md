@@ -1,127 +1,231 @@
-# 🔮 NitinTrace (formerly CodeTrace)
+<div align="center">
 
-> **See your code think.** — Paste any code, watch it execute step-by-step with beautiful animations. No runtime, no setup, no compilation. Pure AI-powered execution simulation.
+# 🔮 N-Trace
 
-[![Status](https://img.shields.io/badge/Status-Phase%201%20%26%20GitHub%20Integration%20Complete%20%E2%9C%85-cyan)]()
-[![License](https://img.shields.io/badge/License-MIT-purple)]()
+### AI-Powered Code Execution Visualizer
 
----
+**Paste any code. Watch it come alive.**
 
-## 🤯 What is NitinTrace?
+[![Tests](https://img.shields.io/badge/Tests-209%20passing-00f0ff?style=flat-square&logo=vitest)](https://github.com/nitinsingh2006/nitin-trace)
+[![License](https://img.shields.io/badge/License-MIT-a855f7?style=flat-square)](LICENSE)
+[![Languages](https://img.shields.io/badge/Languages-17-00f0ff?style=flat-square)](https://n-trace.vercel.app)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-n--trace.vercel.app-00f0ff?style=flat-square)](https://n-trace.vercel.app)
 
-NitinTrace is the **first AI-powered code execution visualizer** that works with **any programming language**. Instead of requiring language-specific runtimes and sandboxed environments, it uses state-of-the-art AI to **simulate** code execution and presents a stunning, animated trace of every step.
-
-**The magic**: You don't need Python installed to trace Python code. You don't need a JVM for Java. You don't need Node for JavaScript. The AI understands the code semantically and produces an execution trace — variable states, console output, and plain-English explanations — all visualized in a beautiful, interactive UI.
-
----
-
-## 🎓 Student-Friendly Features
-
-Built specifically to make learning programming intuitive and engaging:
-
-1. **⚡ Executing Line Preview**: Shows the exact code line executing at the current step (extracted live from Monaco Editor).
-2. **🌈 Progress Bar**: A glowing progress bar that dynamically shifts color (Cyan → Purple → Pink) as the student steps through execution.
-3. **🏷️ Variable Change Badges**:
-   - `NEW` (Cyan): Appears when a variable is first declared in scope.
-   - `CHANGED` (Purple): Appears when a variable's value updates from the previous step.
+</div>
 
 ---
 
-## 🌎 17 Supported Languages
+## ✨ What is N-Trace?
 
-NitinTrace supports 17 popular and system-level languages, complete with student-friendly starter template codes:
+N-Trace is an **AI-powered code execution visualizer** — paste any code, pick a language, and watch the AI trace every variable, call stack, and output **step-by-step**, with no runtime needed.
 
-*   **Popular**: JavaScript, Python, Java, TypeScript
-*   **Systems**: C, C++, C#, Rust
-*   **Modern**: Go, Kotlin, Dart, Scala, Swift
-*   **Scripting**: Ruby, PHP, Bash, R
+No Python? No problem. No JVM? No problem. The AI understands your code semantically and simulates execution — variable states, console output, and plain-English explanations — all visualized in a beautiful, interactive UI.
+
+> **Live at:** [n-trace.vercel.app](https://n-trace.vercel.app)
 
 ---
 
-## 🐙 GitHub Portfolio Integration
+## 🚀 Features
 
-Students can connect their GitHub account using a **Personal Access Token (PAT)** to push their traced programs directly to GitHub:
+| Feature | Description |
+|---------|-------------|
+| 🤖 **4 AI Providers** | Gemini, Groq, OpenAI GPT-4o, Claude — bring your own key |
+| 🌍 **17 Languages** | JS, Python, Java, C++, C, C#, Go, Rust, Kotlin, Swift, TypeScript, Ruby, PHP, Dart, Scala, R, Bash |
+| 🎬 **Step-by-Step Playback** | Play/pause/step with adjustable speed (0.25×–4×) |
+| 📊 **Variable State Table** | Live tracking with `NEW` and `CHANGED` badges on each step |
+| 📚 **Call Stack Visualizer** | See function calls push and pop in real-time |
+| 🖥️ **Console Output Panel** | Simulated stdout/stderr output per step |
+| 📝 **Trace History** | Persistent history via IndexedDB — search, filter, restore |
+| 🐙 **GitHub Integration** | Push traces directly to your repos with one click |
+| 📤 **Export** | Markdown report, JSON data, clipboard copy |
+| 🔗 **Share via URL** | Compressed shareable links for your code |
+| 📱 **Responsive** | Mobile-first design — works on phone, tablet, desktop |
+| 🔌 **PWA** | Install as a desktop/mobile app, works offline |
+| ⌨️ **Keyboard Shortcuts** | Space, arrows, Ctrl+Enter, Home/End |
+| 🎨 **Onboarding Tour** | 5-step interactive tooltip guide for new users |
 
-*   **Auto Repository Creation**: NitinTrace automatically creates a public repository named `codetrace-traces` on the student's GitHub profile.
-*   **Rich Documentation Header**: Every pushed trace includes a beautifully formatted comment block summarizing the execution:
-    ```javascript
-    // ══════════════════════════════════════════════════════
-    //  🧪 NitinTrace — AI Execution Trace
-    //
-    //  Language : javascript
-    //  Steps    : 14
-    //  Saved    : 23 June 2026, 11:15 pm
-    //  Tool     : NitinTrace (AI-Powered Code Visualizer)
-    // ══════════════════════════════════════════════════════
-    ```
-*   **Live Sync Logs**: Pushing a trace prints a success card with a clickable direct link inside the terminal console emulator.
+---
+
+## 🎯 Quick Start
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) 18+
+- An API key from any of: [Gemini](https://aistudio.google.com), [Groq](https://console.groq.com), [OpenAI](https://platform.openai.com), or [Anthropic](https://console.anthropic.com)
+
+### Run Locally
+
+```bash
+# Clone the repository
+git clone https://github.com/nitinsingh2006/nitin-trace.git
+cd nitin-trace
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+```
+
+Open `http://localhost:5174` and add your AI API key in **Settings → API Key**.
+
+### Environment Variables (Optional)
+
+Copy `.env.example` to `.env.local` for local development:
+
+```bash
+cp .env.example .env.local
+```
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Bundler**: Vite (Fast dev server & bundling)
-- **Language**: Vanilla JavaScript (ES modules)
-- **Code Editor**: Monaco Editor
-- **Styling**: Vanilla CSS (glassmorphism, neon design tokens)
-- **AI Engines**: Google Gemini API & Groq API
-- **Storage**: localStorage + IndexedDB (History logs)
-- **Version Control**: Git
+| Layer | Technology |
+|-------|-----------|
+| **Bundler** | Vite 8 |
+| **Language** | Vanilla JavaScript (ES Modules) |
+| **Code Editor** | Monaco Editor 0.45 |
+| **AI Providers** | Gemini, Groq, OpenAI, Claude |
+| **Styling** | Vanilla CSS (glassmorphism, CSS custom properties) |
+| **State Management** | Custom pub/sub reactive store |
+| **Storage** | IndexedDB (history) + localStorage (settings) |
+| **Testing** | Vitest (unit/integration) + Playwright (E2E) |
+| **CI/CD** | GitHub Actions → Vercel |
+| **PWA** | Service Worker + Web App Manifest |
 
 ---
 
-## ⚡ Quick Start
-
-### Prerequisites
-Make sure you have [Node.js](https://nodejs.org/) installed.
-
-### Setup & Run
-1.  **Clone the repo and navigate to it**:
-    ```bash
-    cd new_project
-    ```
-2.  **Install dependencies**:
-    ```bash
-    npm install
-    ```
-3.  **Start the local development server**:
-    ```bash
-    npm run dev
-    ```
-4.  Open `http://localhost:5174` (or the port shown in your terminal) in your browser.
-5.  Configure your **Gemini** or **Groq** API Key inside the **Settings (⚙️)** modal to start tracing!
-
----
-
-## 📁 Project Structure
+## 🗂️ Project Structure
 
 ```
-new_project/
-├── index.html           # Main UI entry point
-├── package.json         # Project dependencies & scripts
+n-trace/
 ├── src/
-│   ├── main.js          # App entry point, DOM rendering & module wiring
-│   ├── style.css        # Glassmorphism, animations, & global styles
+│   ├── main.js               # Entry point (~60 lines)
+│   ├── app.js                # App shell orchestrator
+│   ├── core/
+│   │   ├── state.js          # Reactive pub/sub state store
+│   │   ├── events.js         # Event bus (decoupled components)
+│   │   └── config.js         # Runtime configuration
+│   ├── components/           # 14 self-contained UI components
+│   │   ├── editor-panel.js
+│   │   ├── visualizer-panel.js
+│   │   ├── playback-bar.js
+│   │   ├── header.js
+│   │   ├── footer.js
+│   │   ├── settings-modal.js
+│   │   ├── github-modal.js
+│   │   ├── history-drawer.js
+│   │   ├── onboarding.js
+│   │   └── ...
 │   ├── services/
-│   │   ├── ai.js        # AI prompt construction & API calls
-│   │   ├── editor.js    # Monaco Editor creation & highlight controllers
-│   │   ├── github.js    # GitHub PAT auth, repository setup, & commit pushes
-│   │   ├── history.js   # IndexedDB operations for local trace history
-│   │   ├── trace.js     # Playback controls (play/pause/step)
-│   │   └── visualizer.js# Handles DOM updates, badges, and progress bar
-│   └── utils/
-│       ├── constants.js # 17 languages, starter examples, & settings defaults
-│       └── helpers.js   # Time formatting, HTML escaping
+│   │   ├── ai/               # AI adapters (Gemini, Groq, OpenAI, Claude)
+│   │   ├── editor.js
+│   │   ├── github.js
+│   │   ├── history.js
+│   │   ├── trace.js
+│   │   ├── export-service.js
+│   │   └── theme-service.js
+│   ├── utils/
+│   │   ├── helpers.js
+│   │   ├── constants.js      # 17 languages + sample code
+│   │   ├── sanitize.js       # XSS prevention
+│   │   └── share.js          # URL compression for sharing
+│   ├── styles/               # Modular CSS (14 files)
+│   │   ├── variables.css     # Design tokens
+│   │   ├── responsive.css    # Mobile/tablet/desktop breakpoints
+│   │   └── ...
+│   ├── pages/landing/        # Marketing landing page
+│   ├── examples/             # Curated code examples (17 languages)
+│   └── __tests__/            # 209 tests (unit + integration + E2E)
+├── public/
+│   ├── manifest.json         # PWA manifest
+│   ├── service-worker.js     # Offline support
+│   └── favicon.svg
+├── .github/workflows/
+│   ├── ci.yml                # CI: lint → test → build
+│   └── release.yml           # Release: tag → GitHub Release
+└── vercel.json               # Security headers + deployment config
 ```
+
+---
+
+## 🧪 Testing
+
+```bash
+# Run unit + integration tests (209 tests)
+npm test
+
+# Run with coverage report
+npm run test:coverage
+
+# Run E2E tests (Playwright)
+npm run test:e2e
+
+# Lint check
+npm run lint
+
+# Format check
+npm run format:check
+```
+
+**Coverage targets:** `core/`, `services/`, `utils/` — 80%+ coverage.
+
+---
+
+## 📜 Available Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server (localhost:5174) |
+| `npm run build` | Production build |
+| `npm run preview` | Preview production build |
+| `npm test` | Run Vitest unit + integration tests |
+| `npm run test:coverage` | Tests with V8 coverage report |
+| `npm run test:e2e` | Playwright E2E tests |
+| `npm run lint` | ESLint check |
+| `npm run lint:fix` | Auto-fix lint issues |
+| `npm run format` | Prettier format all source files |
 
 ---
 
 ## 🔒 Security & Privacy
-*   All keys (Gemini, Groq, GitHub PAT) are saved **locally** in the browser's `localStorage`.
-*   Zero backend servers are used; all requests go directly to Google, Groq, and GitHub APIs.
-*   Token scopes are validated to only require `public_repo` permissions.
+
+- **API keys** are stored in `sessionStorage` only — cleared when the tab closes
+- **Zero backend** — all requests go directly to AI APIs (Gemini, Groq, OpenAI, Anthropic) and GitHub
+- **XSS prevention** — all AI output is sanitized before DOM insertion
+- **Content Security Policy** — enforced via `vercel.json` headers
+- **GitHub PAT** — only `public_repo` scope required; validated client-side
+- **Subresource Integrity** — SRI hash on Monaco CDN script
 
 ---
 
-## 📜 License
-MIT — feel free to fork, customize, and build upon.
+## 🌐 Supported Languages
+
+JavaScript • TypeScript • Python • Java • C++ • C • C# • Go • Rust • Kotlin • Swift • Ruby • PHP • Dart • Scala • R • Bash
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for setup instructions, coding standards, and the PR process.
+
+Key guidelines:
+- All PRs require passing CI (lint + tests + build)
+- Follow existing code style (Prettier + ESLint configured)
+- Add tests for new features/bug fixes
+- Run `npm test` before submitting
+
+---
+
+## 📝 License
+
+MIT — see [LICENSE](LICENSE).
+
+---
+
+<div align="center">
+
+**Built by [Nitin Singh](https://github.com/nitinsingh2006) · [Live Demo](https://n-trace.vercel.app) · [Report a Bug](https://github.com/nitinsingh2006/nitin-trace/issues)**
+
+</div>

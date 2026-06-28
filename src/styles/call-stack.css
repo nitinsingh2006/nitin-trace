@@ -1,0 +1,58 @@
+/* ============================================
+   Call Stack Visualizer
+   ============================================ */
+.viz-call-stack .call-stack-frames {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.stack-frame {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0.875rem;
+  background: rgba(139, 92, 246, calc(0.05 + var(--frame-depth, 0) * 0.02));
+  border: 1px solid rgba(139, 92, 246, 0.15);
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  transition: all var(--transition-fast);
+  animation: stack-frame-in 0.2s ease-out;
+}
+
+.stack-frame-active {
+  border-color: rgba(139, 92, 246, 0.5);
+  background: rgba(139, 92, 246, 0.12);
+  box-shadow: 0 0 8px rgba(139, 92, 246, 0.2);
+}
+
+.frame-depth {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  min-width: 1.2rem;
+  text-align: center;
+}
+
+.frame-name {
+  color: var(--accent-purple);
+  flex: 1;
+  font-weight: 500;
+}
+
+.frame-badge {
+  font-size: 0.65rem;
+  padding: 0.15rem 0.5rem;
+  background: rgba(139, 92, 246, 0.2);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: 20px;
+  color: var(--accent-purple);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-family: var(--font-ui);
+}
+
+@keyframes stack-frame-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

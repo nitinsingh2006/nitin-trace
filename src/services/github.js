@@ -1,5 +1,5 @@
 /**
- * CodeTrace — GitHub Integration Service
+ * N-Trace — GitHub Integration Service
  *
  * Uses GitHub REST API v3 with a Personal Access Token (PAT).
  * Requires token scope: public_repo (to create repos & push files).
@@ -10,7 +10,7 @@
  */
 
 const GITHUB_API = 'https://api.github.com';
-export const REPO_NAME = 'nitintrace-traces';
+export const REPO_NAME = 'n-trace-traces';
 
 /** Map language IDs to file extensions */
 const EXTENSIONS = {
@@ -56,12 +56,12 @@ function buildFileHeader(language, steps, date) {
 
   return [
     divider,
-    `${cc}  🧪 NitinTrace — AI Execution Trace`,
+    `${cc}  🧪 N-Trace — AI Execution Trace`,
     `${cc}`,
     `${cc}  Language : ${language}`,
     `${cc}  Steps    : ${steps.length}`,
     `${cc}  Saved    : ${dateStr}`,
-    `${cc}  Tool     : NitinTrace (AI-Powered Code Visualizer)`,
+    `${cc}  Tool     : N-Trace (AI-Powered Code Visualizer)`,
     divider,
     `${cc}`,
     `${cc}  EXECUTION SUMMARY:`,
@@ -118,7 +118,7 @@ async function ensureRepo(token, username, repoName) {
     body: JSON.stringify({
       name: repoName,
       description:
-        '🧪 My NitinTrace execution traces — AI-powered step-by-step code visualization',
+        '🧪 My N-Trace execution traces — AI-powered step-by-step code visualization',
       private: false,
       auto_init: true,
     }),
@@ -156,21 +156,22 @@ export async function pushCodeTrace(token, username, code, language, steps, repo
   const now  = new Date();
   const ymd  = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
   const hms  = `${String(now.getHours()).padStart(2, '0')}${String(now.getMinutes()).padStart(2, '0')}${String(now.getSeconds()).padStart(2, '0')}`;
-  
+
   // Use customFilename if provided, else default to timestamp
   let filename = customFilename.trim();
   if (!filename) {
     filename = `${ymd}_${hms}`;
   }
-  
+
   // Strip extension if entered manually
   if (filename.endsWith(`.${ext}`)) {
     filename = filename.slice(0, -(ext.length + 1));
   }
-  
+
   // Sanitize filename
+  // eslint-disable-next-line no-useless-escape
   filename = filename.replace(/[^a-zA-Z0-9_\-]/g, '_');
-  
+
   const filepath = `traces/${language}/${filename}.${ext}`;
   const header      = buildFileHeader(language, steps, now);
   const fileContent = header + code;
@@ -183,7 +184,7 @@ export async function pushCodeTrace(token, username, code, language, steps, repo
     encoded = btoa(fileContent);
   }
 
-  const commitMessage = `✨ NitinTrace: ${language} (${steps.length} steps) — ${ymd}`;
+  const commitMessage = `✨ N-Trace: ${language} (${steps.length} steps) — ${ymd}`;
 
   const res = await fetch(
     `${GITHUB_API}/repos/${username}/${repoName}/contents/${filepath}`,
@@ -203,7 +204,7 @@ export async function pushCodeTrace(token, username, code, language, steps, repo
     throw new Error(body.message || `GitHub push failed (${res.status}).`);
   }
 
-  const data = await res.json();
+  await res.json();
   return {
     url: `https://github.com/${username}/${repoName}/blob/main/${filepath}`,
     repoUrl: `https://github.com/${username}/${repoName}`,
@@ -211,11 +212,11 @@ export async function pushCodeTrace(token, username, code, language, steps, repo
   };
 }
 
-/* ── Local session helpers ─────────────────────────────────── */
+/* ── Secure session helpers (sessionStorage for PAT) ─────── */
 
 export function getGitHubUser() {
   try {
-    const raw = localStorage.getItem('codetrace_github_user');
+    const raw = sessionStorage.getItem('ntrace_github_user');
     return raw ? JSON.parse(raw) : null;
   } catch {
     return null;
@@ -223,15 +224,15 @@ export function getGitHubUser() {
 }
 
 export function getGitHubToken() {
-  return localStorage.getItem('codetrace_github_token') || '';
+  return sessionStorage.getItem('ntrace_github_token') || '';
 }
 
 export function saveGitHubSession(token, user) {
-  localStorage.setItem('codetrace_github_token', token);
-  localStorage.setItem('codetrace_github_user', JSON.stringify(user));
+  sessionStorage.setItem('ntrace_github_token', token);
+  sessionStorage.setItem('ntrace_github_user', JSON.stringify(user));
 }
 
 export function clearGitHubSession() {
-  localStorage.removeItem('codetrace_github_token');
-  localStorage.removeItem('codetrace_github_user');
+  sessionStorage.removeItem('ntrace_github_token');
+  sessionStorage.removeItem('ntrace_github_user');
 }

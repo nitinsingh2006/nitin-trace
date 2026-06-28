@@ -1,0 +1,25 @@
+/* ============================================
+   Reset & Base Styles
+   ============================================ */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: var(--font-ui);
+  background-color: var(--bg-deep);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#app {
+  height: 100%;
+  background: radial-gradient(circle at 50% -20%, rgba(139, 92, 246, 0.15), transparent 70%),
+              radial-gradient(circle at 10% 80%, rgba(0, 240, 255, 0.05), transparent 50%);
+}

@@ -1,0 +1,331 @@
+/**
+ * N-Trace — Responsive Design (Mobile-First)
+ * Breakpoints:
+ *   Mobile:  < 640px  — stacked single-column
+ *   Tablet:  640–1024px — toggle panels
+ *   Desktop: > 1024px  — current side-by-side
+ */
+
+/* ============================================
+   Mobile (< 640px) — Single-column stacked
+   ============================================ */
+@media (max-width: 639px) {
+  /* App shell: stacked column, full viewport */
+  .app-shell {
+    min-height: 100svh;
+  }
+
+  /* Header: compact with icon-only buttons */
+  .app-header {
+    padding: 0 0.75rem;
+    height: 52px;
+  }
+
+  .header-left {
+    gap: 0.5rem;
+  }
+
+  .header-right {
+    gap: 0.35rem;
+  }
+
+  /* Logo: smaller */
+  .logo {
+    font-size: 1.05rem;
+  }
+
+  .logo-icon {
+    font-size: 1.2rem;
+  }
+
+  .version-badge {
+    display: none; /* hide on tiny screens */
+  }
+
+  /* Hide button text labels — icons only */
+  .btn .btn-label {
+    display: none;
+  }
+
+  /* Make buttons icon-only squares */
+  .btn.btn-ghost {
+    min-width: 36px;
+    padding: 0.4rem;
+    justify-content: center;
+  }
+
+  /* App main: vertical stack */
+  .app-main {
+    grid-template-columns: 1fr;
+    grid-template-rows: 45vh 1fr;
+    height: calc(100svh - 52px);
+    min-height: unset;
+    overflow: auto;
+  }
+
+  /* Editor panel: 45vh */
+  .panel-editor {
+    height: 45vh;
+    min-height: 200px;
+    border-bottom: 2px solid var(--border-color);
+  }
+
+  /* Visualizer panel: remaining space */
+  .panel-visualizer {
+    height: auto;
+    min-height: 300px;
+    overflow-y: auto;
+  }
+
+  /* Panel headers: tighter */
+  .panel-header {
+    padding: 0.65rem 1rem;
+  }
+
+  /* Playback bar: larger touch targets (44px min) */
+  .playback-bar {
+    padding: 0.75rem 0.75rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .playback-controls {
+    gap: 0.5rem;
+  }
+
+  /* All playback control buttons: 44px touch target */
+  .ctrl-btn {
+    width: 44px;
+    height: 44px;
+    font-size: 1.05rem;
+  }
+
+  /* Primary play/pause button: slightly larger */
+  .ctrl-btn-primary {
+    width: 48px;
+    height: 48px;
+    font-size: 1.2rem;
+  }
+
+  /* Speed control: compact */
+  .speed-control {
+    gap: 0.5rem;
+  }
+
+  .speed-slider {
+    width: 72px;
+  }
+
+  /* Step counter: smaller */
+  .step-counter {
+    font-size: 0.72rem;
+  }
+
+  /* Modals: full-screen bottom sheet style */
+  .modal-overlay {
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .modal {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 20px 20px 0 0;
+    max-height: 90svh;
+    overflow-y: auto;
+    animation: modal-slide-up 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Drawer (history): full-width bottom sheet */
+  .drawer-overlay {
+    align-items: flex-end;
+  }
+
+  .drawer {
+    width: 100%;
+    max-width: 100%;
+    height: 85svh;
+    border-radius: 20px 20px 0 0;
+  }
+
+  /* FAB for trace action — shown only on mobile */
+  body .fab-trace {
+    display: flex;
+  }
+
+  /* Footer: single column stacked */
+  .app-footer {
+    padding: 1.5rem 1rem;
+  }
+
+  .footer-top,
+  .footer-middle,
+  .footer-bottom {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  /* Viz sections padding */
+  .viz-sections {
+    padding: 0.5rem;
+  }
+
+  .viz-section {
+    padding: 0.75rem;
+  }
+
+  /* Variables table: horizontal scroll */
+  .variables-table-container {
+    overflow-x: auto;
+  }
+
+  /* Language select: full width */
+  .language-select {
+    max-width: 120px;
+    font-size: 0.78rem;
+  }
+
+  /* Btn-trace: hide label on mobile (FAB handles it) */
+  .panel-footer .btn-trace .btn-label {
+    display: none;
+  }
+
+  .panel-footer {
+    padding: 0.65rem 1rem;
+  }
+}
+
+/* ============================================
+   Tablet (640px – 1024px) — Two-panel, compact
+   ============================================ */
+@media (min-width: 640px) and (max-width: 1023px) {
+  /* Header: normal height, shortened labels */
+  .app-header {
+    padding: 0 1rem;
+    height: 58px;
+  }
+
+  .header-right {
+    gap: 0.5rem;
+  }
+
+  .version-badge {
+    display: none;
+  }
+
+  /* Shorten button labels on tablet */
+  #btn-history .btn-label { content: 'History'; }
+  #btn-examples .btn-label { content: 'Examples'; }
+  #btn-settings .btn-label { content: 'Settings'; }
+
+  /* App main: two side-by-side columns (slightly smaller) */
+  .app-main {
+    grid-template-columns: 1fr 1fr;
+    height: calc(100svh - 58px);
+  }
+
+  /* Modals: centered, 90% width */
+  .modal {
+    width: 90%;
+    max-width: 480px;
+  }
+
+  /* Drawer: 80% width */
+  .drawer {
+    width: 80%;
+    max-width: 400px;
+  }
+
+  /* Playback: slightly smaller touch targets (still comfortable) */
+  .ctrl-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .ctrl-btn-primary {
+    width: 46px;
+    height: 46px;
+  }
+
+  /* FAB hidden on tablet (trace button visible in panel) */
+  .fab-trace {
+    display: none;
+  }
+
+  /* Panel header: slightly tighter */
+  .panel-header {
+    padding: 0.75rem 1.25rem;
+  }
+
+  /* Playback bar: tighter padding */
+  .playback-bar {
+    padding: 0.75rem 1.25rem;
+  }
+}
+
+/* ============================================
+   Desktop (> 1023px) — Side-by-side (default)
+   ============================================ */
+@media (min-width: 1024px) {
+  /* FAB hidden on desktop */
+  .fab-trace {
+    display: none;
+  }
+}
+
+/* ============================================
+   FAB — Floating Action Button (mobile trace)
+   ============================================ */
+.fab-trace {
+  position: fixed;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  z-index: 200;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+  border: none;
+  color: #000;
+  font-size: 1.4rem;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0, 240, 255, 0.4), 0 2px 8px rgba(0, 0, 0, 0.4);
+  display: none; /* shown only on mobile via media query */
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s var(--transition-fast), box-shadow 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.fab-trace:hover,
+.fab-trace:focus {
+  transform: scale(1.08);
+  box-shadow: 0 6px 28px rgba(0, 240, 255, 0.55), 0 3px 10px rgba(0, 0, 0, 0.4);
+  outline: none;
+}
+
+.fab-trace:active {
+  transform: scale(0.96);
+}
+
+/* ============================================
+   Mobile modal slide-up animation
+   ============================================ */
+@keyframes modal-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

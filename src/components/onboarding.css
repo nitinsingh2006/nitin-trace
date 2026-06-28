@@ -1,0 +1,159 @@
+/**
+ * N-Trace — Onboarding Tour Styles
+ * Dark-themed tooltip overlays with backdrop
+ */
+
+.onboarding-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 990;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.onboarding-tooltip {
+  position: fixed;
+  z-index: 999;
+  background: #1a1a2e;
+  border: 1px solid var(--accent-cyan, #00f0ff);
+  border-radius: 12px;
+  padding: 1.25rem;
+  max-width: 320px;
+  min-width: 240px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    0 0 0 3px rgba(0, 240, 255, 0.15);
+  animation: onboarding-fade-in 0.25s ease-out;
+}
+
+.onboarding-step-indicator {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-cyan, #00f0ff);
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.onboarding-tooltip-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.35rem;
+}
+
+.onboarding-tooltip-text {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.onboarding-tooltip-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.onboarding-skip-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 0.35rem 0.5rem;
+  border-radius: 6px;
+  transition: color 0.15s, background 0.15s;
+}
+
+.onboarding-skip-btn:hover {
+  color: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.onboarding-next-btn {
+  background: linear-gradient(135deg, var(--accent-cyan, #00f0ff), var(--accent-purple, #8b5cf6));
+  color: #000;
+  border: none;
+  padding: 0.5rem 1.25rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.onboarding-next-btn:hover {
+  transform: scale(1.04);
+  box-shadow: 0 4px 16px rgba(0, 240, 255, 0.35);
+}
+
+.onboarding-next-btn:active {
+  transform: scale(0.97);
+}
+
+/* Arrow pseudo-elements for each placement */
+.onboarding-tooltip.onboarding-top::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid #1a1a2e;
+}
+
+.onboarding-tooltip.onboarding-bottom::after {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid #1a1a2e;
+}
+
+.onboarding-tooltip.onboarding-left::after {
+  content: '';
+  position: absolute;
+  right: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 8px solid #1a1a2e;
+}
+
+.onboarding-tooltip.onboarding-right::after {
+  content: '';
+  position: absolute;
+  left: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid #1a1a2e;
+}
+
+@keyframes onboarding-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
