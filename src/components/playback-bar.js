@@ -1,5 +1,5 @@
 /**
- * NitinTrace — Playback Bar Component
+ * N-Trace — Playback Bar Component
  *
  * Renders playback control buttons (restart, step back, play/pause, step forward, end)
  * and speed controls slider.

@@ -1,5 +1,5 @@
 /**
- * NitinTrace — Analytics Service
+ * N-Trace — Analytics Service
  *
  * Lightweight event tracking using Navigator.sendBeacon for reliability.
  * In production, events are sent to a configurable endpoint.

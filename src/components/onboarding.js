@@ -1,5 +1,5 @@
 /**
- * NitinTrace — Onboarding Tour (5-step tooltip overlay)
+ * N-Trace — Onboarding Tour (5-step tooltip overlay)
  *
  * First-visit guided tour pointing to key UI landmarks.
  * Persists completion via localStorage.
@@ -39,7 +39,7 @@ const STEPS = [
   }
 ];
 
-const STORAGE_KEY = 'nitintrace_onboarding_done';
+const STORAGE_KEY = 'ntrace_onboarding_done';
 
 function hasCompletedOnboarding() {
   try {

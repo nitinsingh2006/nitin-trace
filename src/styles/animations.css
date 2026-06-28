@@ -90,7 +90,7 @@
   }
 }
 
-@keyframes codetrace-line-glow {
+@keyframes ntrace-line-glow {
   0% {
     background: rgba(0, 240, 255, 0.08);
     box-shadow: inset 10px 0 20px rgba(0, 240, 255, 0.03);

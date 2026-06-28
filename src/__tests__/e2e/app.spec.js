@@ -1,7 +1,7 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
 
-test.describe('NitinTrace App', () => {
+test.describe('N-Trace App', () => {
   test('should load the application', async ({ page }) => {
     await page.goto('/');
     await expect(page.locator('#app')).toBeAttached();

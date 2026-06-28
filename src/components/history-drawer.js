@@ -1,5 +1,5 @@
 /**
- * NitinTrace — History Drawer Component
+ * N-Trace — History Drawer Component
  *
  * Renders the saved trace history list side-drawer.
  * Users can search, load past execution traces, or clear all saved records.

@@ -1,5 +1,5 @@
 /**
- * NitinTrace — AI Response Parser & Validator
+ * N-Trace — AI Response Parser & Validator
  *
  * Validates, sanitizes, and normalizes AI responses into a guaranteed
  * safe trace step array before any DOM rendering.
@@ -15,30 +15,13 @@
  * @property {string} console - Cumulative console output
  */
 
-/**
- * Escape HTML special characters to prevent XSS when rendering AI output.
- * @param {*} value - Any value
- * @returns {string}
- */
 function sanitizeString(value) {
-  if (typeof value !== 'string') {
-    return String(value ?? '')
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#039;');
-  }
-  return value
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;');
+  return String(value ?? '');
 }
 
 /**
- * Sanitize a variables object — recursively converts values to safe strings.
+ * Sanitize a variables object — preserves original type metadata alongside sanitized display value.
+ * Returns objects of shape { value: string, type: string } to allow correct type display.
  * @param {*} vars
  * @returns {Object}
  */
@@ -49,33 +32,46 @@ function sanitizeVariables(vars) {
 
   const result = {};
   for (const [key, value] of Object.entries(vars)) {
-    // Sanitize the key (variable name)
-    const safeKey = sanitizeString(key).slice(0, 100); // Max 100 chars per key
+    const safeKey = String(key).slice(0, 100);
     if (!safeKey) continue;
 
-    // Convert value to a display string
     let displayValue;
+    let originalType;
+
     if (value === null) {
       displayValue = 'null';
+      originalType = 'null';
     } else if (value === undefined) {
       displayValue = 'undefined';
+      originalType = 'undefined';
+    } else if (Array.isArray(value)) {
+      try {
+        displayValue = JSON.stringify(value, null, 0);
+        if (displayValue.length > 500) displayValue = displayValue.slice(0, 497) + '...';
+      } catch { displayValue = '[array]'; }
+      originalType = 'Array';
     } else if (typeof value === 'object') {
       try {
         displayValue = JSON.stringify(value, null, 0);
-        if (displayValue.length > 500) {
-          displayValue = displayValue.slice(0, 497) + '...';
-        }
-      } catch {
-        displayValue = '[object]';
-      }
+        if (displayValue.length > 500) displayValue = displayValue.slice(0, 497) + '...';
+      } catch { displayValue = '[object]'; }
+      originalType = 'Object';
+    } else if (typeof value === 'boolean') {
+      displayValue = String(value);
+      originalType = 'Boolean';
+    } else if (typeof value === 'number') {
+      displayValue = String(value);
+      originalType = 'Number';
     } else {
       displayValue = String(value);
-      if (displayValue.length > 500) {
-        displayValue = displayValue.slice(0, 497) + '...';
-      }
+      if (displayValue.length > 500) displayValue = displayValue.slice(0, 497) + '...';
+      originalType = 'String';
     }
 
-    result[safeKey] = sanitizeString(displayValue);
+    result[safeKey] = {
+      value: displayValue,
+      type: originalType
+    };
   }
   return result;
 }

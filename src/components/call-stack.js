@@ -1,5 +1,5 @@
 /**
- * NitinTrace — Call Stack Visualizer
+ * N-Trace — Call Stack Visualizer
  * Renders animated stack frames from trace step data.
  * Shows push/pop animations when frames change between steps.
  */

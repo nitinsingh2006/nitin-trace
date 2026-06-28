@@ -48,7 +48,7 @@ describe('parseTraceResponse()', () => {
 
   // ── XSS Prevention ───────────────────────────────────────────────────────
 
-  it('sanitizes XSS in explanations', () => {
+  it('passes HTML through unescaped (escaping handled by UI)', () => {
     const malicious = JSON.stringify({
       steps: [{
         line: 1,
@@ -58,11 +58,10 @@ describe('parseTraceResponse()', () => {
       }]
     });
     const { steps } = parseTraceResponse(malicious);
-    expect(steps[0].explanation).not.toContain('<script>');
-    expect(steps[0].explanation).toContain('&lt;script&gt;');
+    expect(steps[0].explanation).toBe('<script>alert("xss")</script>');
   });
 
-  it('sanitizes XSS in console output', () => {
+  it('passes console tags through unescaped', () => {
     const malicious = JSON.stringify({
       steps: [{
         line: 1,
@@ -72,11 +71,10 @@ describe('parseTraceResponse()', () => {
       }]
     });
     const { steps } = parseTraceResponse(malicious);
-    expect(steps[0].console).not.toContain('<img');
-    expect(steps[0].console).toContain('&lt;img');
+    expect(steps[0].console).toBe('<img src=x onerror=alert(1)>');
   });
 
-  it('sanitizes XSS in variable keys and values', () => {
+  it('passes variable tags through unescaped', () => {
     const malicious = JSON.stringify({
       steps: [{
         line: 1,
@@ -87,8 +85,8 @@ describe('parseTraceResponse()', () => {
     });
     const { steps } = parseTraceResponse(malicious);
     const keys = Object.keys(steps[0].variables);
-    expect(keys[0]).not.toContain('<evil>');
-    expect(Object.values(steps[0].variables)[0]).not.toContain('<script>');
+    expect(keys[0]).toBe('<evil>');
+    expect(Object.values(steps[0].variables)[0].value).toBe('<script>alert(1)</script>');
   });
 
   // ── Error cases ─────────────────────────────────────────────────────────
@@ -171,7 +169,8 @@ describe('parseTraceResponse()', () => {
       }]
     });
     const { steps } = parseTraceResponse(json);
-    const val = Object.values(steps[0].variables)[0];
+    const valObj = Object.values(steps[0].variables)[0];
+    const val = valObj.value;
     // Value should be truncated to ≤500 chars + possible '...' suffix
     expect(val.length).toBeLessThanOrEqual(503);
     expect(val.length).toBeLessThan(1000); // Must be shorter than 1000

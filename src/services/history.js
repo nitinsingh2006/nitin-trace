@@ -1,12 +1,12 @@
 /**
- * CodeTrace — History Service (IndexedDB)
+ * N-Trace — History Service (IndexedDB)
  * Saves successfully completed execution traces locally in the browser
  * so they can be re-run, searched, and managed.
  */
 
 import { uid } from '../utils/helpers.js';
 
-const DB_NAME = 'nitintrace_db';
+const DB_NAME = 'ntrace_db';
 const DB_VERSION = 1;
 const STORE_NAME = 'history';
 

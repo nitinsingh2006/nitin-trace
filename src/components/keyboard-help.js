@@ -1,5 +1,5 @@
 /**
- * NitinTrace — Keyboard Shortcut Help Panel
+ * N-Trace — Keyboard Shortcut Help Panel
  * Toggle with the '?' key. Shows all keyboard shortcuts.
  */
 const SHORTCUTS = [

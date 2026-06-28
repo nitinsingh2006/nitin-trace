@@ -1,5 +1,5 @@
 /**
- * NitinTrace — GitHub Integration Modals
+ * N-Trace — GitHub Integration Modals
  *
  * Renders:
  *  1. GitHub Connect Modal (OAuth/PAT connectivity)
@@ -33,7 +33,7 @@ export function initGitHubModals(container) {
               <div class="github-hero-icon">🐙</div>
               <p class="github-hero-desc">
                 Save your traced code directly to a <strong>GitHub repository</strong>.<br />
-                Every trace creates a file in your chosen repo (default: <code>nitintrace-traces</code>) with an AI-generated execution summary.
+                Every trace creates a file in your chosen repo (default: <code>n-trace-traces</code>) with an AI-generated execution summary.
               </p>
             </div>
             <div class="form-group">
@@ -46,7 +46,7 @@ export function initGitHubModals(container) {
                 autocomplete="off"
               />
               <p class="form-hint">
-                <a href="https://github.com/settings/tokens/new?scopes=public_repo&description=NitinTrace+Traces" target="_blank" rel="noopener">🔑 Generate token on GitHub</a>
+                <a href="https://github.com/settings/tokens/new?scopes=public_repo&description=N-Trace+Traces" target="_blank" rel="noopener">🔑 Generate token on GitHub</a>
                 &nbsp;— select <code>public_repo</code> scope only.
               </p>
             </div>
@@ -102,7 +102,7 @@ export function initGitHubModals(container) {
               type="text"
               id="github-save-repo"
               class="form-input"
-              value="nitintrace-traces"
+              value="n-trace-traces"
               placeholder="e.g. my-custom-repo"
               style="width:100%;"
             />

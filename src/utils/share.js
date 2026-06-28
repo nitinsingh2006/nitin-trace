@@ -1,5 +1,5 @@
 /**
- * NitinTrace — Shareable URL Compression Utilities
+ * N-Trace — Shareable URL Compression Utilities
  * Uses browser-native CompressionStream (gzip) for compact base64-url sharing.
  */
 

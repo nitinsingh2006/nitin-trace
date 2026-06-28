@@ -1,5 +1,5 @@
 /**
- * NitinTrace — Export Service
+ * N-Trace — Export Service
  *
  * Handles exporting trace data in multiple formats:
  * - Markdown report (.md)
@@ -7,7 +7,7 @@
  * - Clipboard copy (text/plain)
  */
 
-const APP_NAME = 'NitinTrace';
+const APP_NAME = 'N-Trace';
 const APP_VERSION = '1.0.0';
 const APP_URL = 'https://n-trace.vercel.app';
 
@@ -69,7 +69,12 @@ export function exportToMarkdown(code, language, steps) {
       lines.push(`| Variable | Value | Type |`);
       lines.push(`| --- | --- | --- |`);
       for (const [key, value] of Object.entries(step.variables)) {
-        const type = Array.isArray(value) ? 'array' : typeof value;
+        let type = '';
+        if (value && typeof value === 'object' && 'type' in value) {
+          type = value.type;
+        } else {
+          type = Array.isArray(value) ? 'array' : typeof value;
+        }
         const display = formatValueForMarkdown(value);
         lines.push(`| \`${key}\` | \`${display}\` | ${type} |`);
       }
@@ -115,7 +120,7 @@ export function exportToJSON(code, language, steps) {
       version: APP_VERSION,
       url: APP_URL,
       exportedAt: new Date().toISOString(),
-      format: 'nitintrace-trace-v1',
+      format: 'n-trace-v1',
     },
     trace: {
       language,
@@ -238,7 +243,7 @@ export function downloadAsFile(content, filename, mimeType) {
 export function downloadMarkdown(code, language, steps) {
   const content = exportToMarkdown(code, language, steps);
   const langSlug = language.toLowerCase().replace(/\s+/g, '-');
-  const filename = `nitintrace-${langSlug}-${dateSlug()}.md`;
+  const filename = `n-trace-${langSlug}-${dateSlug()}.md`;
   downloadAsFile(content, filename, 'text/markdown;charset=utf-8');
 }
 
@@ -251,7 +256,7 @@ export function downloadMarkdown(code, language, steps) {
 export function downloadJSON(code, language, steps) {
   const content = exportToJSON(code, language, steps);
   const langSlug = language.toLowerCase().replace(/\s+/g, '-');
-  const filename = `nitintrace-${langSlug}-${dateSlug()}.json`;
+  const filename = `n-trace-${langSlug}-${dateSlug()}.json`;
   downloadAsFile(content, filename, 'application/json;charset=utf-8');
 }
 
@@ -267,6 +272,9 @@ function dateSlug() {
 }
 
 function formatValue(val) {
+  if (val && typeof val === 'object' && 'value' in val && 'type' in val) {
+    return val.value;
+  }
   if (val === null) return 'null';
   if (val === undefined) return 'undefined';
   if (typeof val === 'string') return `"${val}"`;

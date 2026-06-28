@@ -1,5 +1,5 @@
 /**
- * NitinTrace — AI-Powered Code Execution Visualizer
+ * N-Trace — AI-Powered Code Execution Visualizer
  * Main Entry Point
  */
 
@@ -28,19 +28,19 @@ function showLanding() {
 
   landingCleanup = initLandingPage(container);
   // Listen for start event from landing page (dispatched on window by landing.js)
-  window.addEventListener('nitintrace:start', bootApp, { once: true });
+  window.addEventListener('ntrace:start', bootApp, { once: true });
 }
 
 // Boot the application on DOM Content Loaded
 document.addEventListener('DOMContentLoaded', () => {
   initAnalytics();
   // Show landing page on first visit, or app if returning
-  const hasVisited = localStorage.getItem('nitintrace_hasVisited');
+  const hasVisited = localStorage.getItem('ntrace_hasVisited');
   if (hasVisited) {
     bootApp();
   } else {
     showLanding();
-    localStorage.setItem('nitintrace_hasVisited', 'true');
+    localStorage.setItem('ntrace_hasVisited', 'true');
   }
 });
 
@@ -49,7 +49,7 @@ if ('serviceWorker' in navigator && import.meta.env.PROD) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/service-worker.js')
       .then((reg) => {
-        console.log('NitinTrace Service Worker registered successfully:', reg.scope);
+        console.log('N-Trace Service Worker registered successfully:', reg.scope);
       })
       .catch((err) => {
         console.error('Service Worker registration failed:', err);

@@ -1,10 +1,10 @@
 /* eslint-disable no-useless-escape */
 /**
- * NitinTrace — Language Constants & Sample Code
+ * N-Trace — Language Constants & Sample Code
  * Use CONFIG (from @core/config.js) for runtime configuration.
  */
 
-export const APP_NAME = 'NitinTrace';
+export const APP_NAME = 'N-Trace';
 export const APP_VERSION = '1.0.0';
 
 /**
@@ -105,7 +105,7 @@ func reverse(s string) string {
 }
 
 func main() {
-    word := "CodeTrace"
+    word := "N-Trace"
     reversed := reverse(word)
     fmt.Println("Reversed:", reversed)
 }`
@@ -385,25 +385,25 @@ export const DEFAULTS = {
  */
 export const STORAGE_KEYS = {
   // Settings (localStorage)
-  PROVIDER:       'nitintrace_settings.provider',
-  GEMINI_MODEL:   'nitintrace_settings.geminiModel',
-  GROQ_MODEL:     'nitintrace_settings.groqModel',
-  OPENAI_MODEL:   'nitintrace_settings.openaiModel',
-  CLAUDE_MODEL:   'nitintrace_settings.claudeModel',
-  LANGUAGE:       'nitintrace_settings.language',
-  SPEED:          'nitintrace_settings.speed',
+  PROVIDER:       'ntrace_settings.provider',
+  GEMINI_MODEL:   'ntrace_settings.geminiModel',
+  GROQ_MODEL:     'ntrace_settings.groqModel',
+  OPENAI_MODEL:   'ntrace_settings.openaiModel',
+  CLAUDE_MODEL:   'ntrace_settings.claudeModel',
+  LANGUAGE:       'ntrace_settings.language',
+  SPEED:          'ntrace_settings.speed',
   // API keys (sessionStorage — cleared on tab close)
-  GEMINI_API_KEY: 'nitintrace_settings.geminiApiKey',
-  GROQ_API_KEY:   'nitintrace_settings.groqApiKey',
-  OPENAI_API_KEY: 'nitintrace_settings.openaiApiKey',
-  CLAUDE_API_KEY: 'nitintrace_settings.claudeApiKey',
+  GEMINI_API_KEY: 'ntrace_settings.geminiApiKey',
+  GROQ_API_KEY:   'ntrace_settings.groqApiKey',
+  OPENAI_API_KEY: 'ntrace_settings.openaiApiKey',
+  CLAUDE_API_KEY: 'ntrace_settings.claudeApiKey',
   // GitHub (sessionStorage)
-  GITHUB_TOKEN:    'nitintrace_github.token',
-  GITHUB_USERNAME: 'nitintrace_github.username',
-  GITHUB_AVATAR:   'nitintrace_github.avatar',
+  GITHUB_TOKEN:    'ntrace_github.token',
+  GITHUB_USERNAME: 'ntrace_github.username',
+  GITHUB_AVATAR:   'ntrace_github.avatar',
   // UI
-  ONBOARDING_DONE: 'nitintrace_onboarding_done',
-  THEME:           'nitintrace_theme',
+  ONBOARDING_DONE: 'ntrace_onboarding_done',
+  THEME:           'ntrace_theme',
 };
 
 /**

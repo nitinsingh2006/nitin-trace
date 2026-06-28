@@ -1,5 +1,5 @@
 /**
- * NitinTrace — Landing Page Component
+ * N-Trace — Landing Page Component
  *
  * Renders a standalone landing page into a container element.
  * @param {HTMLElement} container
@@ -118,7 +118,7 @@ function buildHTML() {
         <span class="landing-section-label">Languages</span>
         <h2 class="landing-section-title">17 languages, one trace engine</h2>
         <p class="landing-section-subtitle" style="margin: 0 auto;">
-          From dynamic scripting to compiled systems — NitinTrace speaks your language.
+          From dynamic scripting to compiled systems — N-Trace speaks your language.
         </p>
 
         <div class="landing-languages-track">
@@ -208,7 +208,7 @@ function buildHTML() {
           </a>
         </div>
         <div class="landing-footer-copy">
-          &copy; ${new Date().getFullYear()} NitinTrace. Built with AI.
+          &copy; ${new Date().getFullYear()} N-Trace. Built with AI.
         </div>
       </footer>
 
@@ -238,7 +238,7 @@ export function initLandingPage(container) {
   // CTA button dispatches a custom event so the app can switch views
   const cta = root.querySelector('#landing-cta');
   const onCtaClick = () => {
-    window.dispatchEvent(new window.CustomEvent('nitintrace:start', { bubbles: true }));
+    window.dispatchEvent(new window.CustomEvent('ntrace:start', { bubbles: true }));
   };
   cta?.addEventListener('click', onCtaClick);
 

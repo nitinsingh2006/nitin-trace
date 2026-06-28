@@ -81,7 +81,12 @@ class StateStore {
         maxHistoryItems: 100,
         enableAnalytics: false,
         enableErrorReporting: false,
-        explanationLanguage: 'english'
+        explanationLanguage: 'english',
+        explanationMode: 'beginner', // 'beginner' | 'advanced'
+        geminiApiKey: '',
+        groqApiKey: '',
+        openaiApiKey: '',
+        claudeApiKey: ''
       },
 
       // Auth state
@@ -304,7 +309,12 @@ class StateStore {
         maxHistoryItems: 100,
         enableAnalytics: false,
         enableErrorReporting: false,
-        explanationLanguage: 'english'
+        explanationLanguage: 'english',
+        explanationMode: 'beginner', // 'beginner' | 'advanced'
+        geminiApiKey: '',
+        groqApiKey: '',
+        openaiApiKey: '',
+        claudeApiKey: ''
       },
       auth: {
         user: null,

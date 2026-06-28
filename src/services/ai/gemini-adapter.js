@@ -1,5 +1,5 @@
 /**
- * NitinTrace — Google Gemini AI Adapter
+ * N-Trace — Google Gemini AI Adapter
  *
  * Handles all Gemini-specific API communication.
  * Uses Authorization header (Bearer) instead of URL query param to prevent
@@ -8,7 +8,7 @@
 
 import { CONFIG } from '@core/config.js';
 import {
-  EXECUTION_TRACE_SYSTEM_PROMPT,
+  getActiveSystemPrompt,
   GEMINI_RESPONSE_SCHEMA,
   buildUserPrompt,
 } from './prompts.js';
@@ -40,7 +40,7 @@ export async function fetchGeminiTrace(code, language, apiKey, model, signal) {
       },
     ],
     systemInstruction: {
-      parts: [{ text: EXECUTION_TRACE_SYSTEM_PROMPT }],
+      parts: [{ text: getActiveSystemPrompt() }],
     },
     generationConfig: {
       responseMimeType: 'application/json',

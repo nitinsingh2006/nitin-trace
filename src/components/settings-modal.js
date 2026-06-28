@@ -1,5 +1,5 @@
 /**
- * NitinTrace — Settings Modal Component
+ * N-Trace — Settings Modal Component
  *
  * Renders settings dialog allowing users to configure AI provider (Gemini or Groq),
  * model preferences, and API keys.
@@ -66,6 +66,15 @@ export function initSettingsModal(container) {
               <option value="hindi">Hindi / Hinglish</option>
             </select>
           </div>
+
+          <div class="form-group">
+            <label class="setting-label">Explanation Depth</label>
+            <p class="form-hint" style="margin-bottom:0.5rem;">Beginner mode explains concepts simply with analogies. Advanced mode uses precise technical language.</p>
+            <div class="toggle-group" id="explanation-mode-toggle" style="display:flex;gap:0.5rem;">
+              <button class="btn btn-ghost toggle-btn active" data-mode="beginner" id="toggle-beginner" style="flex:1;">🌱 Beginner</button>
+              <button class="btn btn-ghost toggle-btn" data-mode="advanced" id="toggle-advanced" style="flex:1;">⚡ Advanced</button>
+            </div>
+          </div>
         </div>
         <div class="modal-footer">
           <button class="btn btn-ghost" id="settings-cancel">Cancel</button>
@@ -93,6 +102,9 @@ export function initSettingsModal(container) {
   const groupClaudeKey = modalEl.querySelector('#group-claude-key');
   const modelSelect = modalEl.querySelector('#model-select');
   const explanationLangSelect = modalEl.querySelector('#explanation-lang-select');
+  const toggleBeginner = modalEl.querySelector('#toggle-beginner');
+  const toggleAdvanced = modalEl.querySelector('#toggle-advanced');
+  const explanationModeToggle = modalEl.querySelector('#explanation-mode-toggle');
 
   const btnClose = modalEl.querySelector('#settings-close');
   const btnCancel = modalEl.querySelector('#settings-cancel');
@@ -106,6 +118,11 @@ export function initSettingsModal(container) {
     openaiKeyInput.value = store.get('settings.openaiApiKey') || '';
     claudeKeyInput.value = store.get('settings.claudeApiKey') || '';
     explanationLangSelect.value = store.get('settings.explanationLanguage') || 'english';
+
+    // Load explanation mode toggle state
+    const currentMode = store.get('settings.explanationMode') || 'beginner';
+    toggleBeginner.classList.toggle('active', currentMode === 'beginner');
+    toggleAdvanced.classList.toggle('active', currentMode === 'advanced');
 
     updateProviderFields();
   };
@@ -151,6 +168,15 @@ export function initSettingsModal(container) {
 
   providerSelect.addEventListener('change', updateProviderFields);
 
+  // Wire explanation mode toggle buttons
+  explanationModeToggle.addEventListener('click', (e) => {
+    const btn = e.target.closest('.toggle-btn');
+    if (!btn) return;
+    const mode = btn.dataset.mode;
+    toggleBeginner.classList.toggle('active', mode === 'beginner');
+    toggleAdvanced.classList.toggle('active', mode === 'advanced');
+  });
+
   // Close handlers
   const closeSettings = () => {
     store.set('ui.settingsOpen', false);
@@ -195,6 +221,7 @@ export function initSettingsModal(container) {
     store.set('settings.claudeApiKey', claudeKey);
     store.set(`settings.${provider}Model`, model);
     store.set('settings.explanationLanguage', explanationLangSelect.value);
+    store.set('settings.explanationMode', toggleAdvanced.classList.contains('active') ? 'advanced' : 'beginner');
 
     closeSettings();
 
@@ -227,7 +254,7 @@ export function initSettingsModal(container) {
       const openaiKey = store.get('settings.openaiApiKey');
       const claudeKey = store.get('settings.claudeApiKey');
       if (!geminiKey && !groqKey && !openaiKey && !claudeKey) {
-        eventBus.emit('toast:show', { message: 'Welcome to NitinTrace! Setup your AI API Key to get started.', type: 'info' });
+        eventBus.emit('toast:show', { message: 'Welcome to N-Trace! Setup your AI API Key to get started.', type: 'info' });
         store.set('ui.settingsOpen', true);
       }
     }

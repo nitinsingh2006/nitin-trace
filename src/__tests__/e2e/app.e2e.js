@@ -1,6 +1,6 @@
 // @ts-check
 /**
- * NitinTrace — E2E Tests: Landing Page & App Bootstrap
+ * N-Trace — E2E Tests: Landing Page & App Bootstrap
  *
  * Tests critical user journeys using Playwright.
  * Note: These tests require `npm run dev` (port 5174) or a built preview.
@@ -40,8 +40,8 @@ async function goToApp(page) {
       }
     };
     localStorage.setItem('n-trace-state', JSON.stringify(state));
-    localStorage.setItem('nitintrace_hasVisited', 'true');
-    localStorage.setItem('nitintrace_onboarding_done', 'true');
+    localStorage.setItem('ntrace_hasVisited', 'true');
+    localStorage.setItem('ntrace_onboarding_done', 'true');
   });
   await page.goto('/');
   // Wait for the app shell to mount
@@ -54,8 +54,8 @@ async function goToApp(page) {
 async function goToLanding(page) {
   await page.addInitScript(() => {
     localStorage.removeItem('n-trace-state');
-    localStorage.removeItem('nitintrace_hasVisited');
-    localStorage.setItem('nitintrace_onboarding_done', 'true');
+    localStorage.removeItem('ntrace_hasVisited');
+    localStorage.setItem('ntrace_onboarding_done', 'true');
   });
   await page.goto('/');
 }

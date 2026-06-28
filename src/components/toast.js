@@ -1,5 +1,5 @@
 /**
- * NitinTrace — Toast Notification Component
+ * N-Trace — Toast Notification Component
  *
  * Listens to the event bus for 'toast:show' events to display reactive notifications.
  * Removes the need for window.showToast global pollution.
@@ -54,6 +54,11 @@ export function showToast(message, type = 'info') {
 
 // Wire up the Event Bus listener
 eventBus.on('toast:show', ({ message, type }) => {
+  showToast(message, type);
+});
+
+// Also listen on the canonical EVENTS.UI_TOAST_SHOW name used by app.js
+eventBus.on('ui:toast:show', ({ message, type }) => {
   showToast(message, type);
 });
 

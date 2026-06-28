@@ -1,5 +1,5 @@
 /**
- * NitinTrace — Floating Action Button (FAB) for mobile trace execution
+ * N-Trace — Floating Action Button (FAB) for mobile trace execution
  */
 import store from '../core/state.js';
 import eventBus from '../core/events.js';

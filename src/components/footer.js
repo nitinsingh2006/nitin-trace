@@ -1,5 +1,5 @@
 /**
- * NitinTrace — Footer Component
+ * N-Trace — Footer Component
  *
  * Features:
  * - GitHub CTA section with Star & Source buttons
@@ -92,7 +92,7 @@ function buildFooterHTML() {
             <span class="footer-cta-icon-svg">${icons.github}</span>
           </div>
           <div class="footer-cta-text">
-            <h2 class="footer-cta-heading">Enjoying NitinTrace?</h2>
+            <h2 class="footer-cta-heading">Enjoying N-Trace?</h2>
             <p class="footer-cta-desc">
               Support the project by starring it on GitHub — it really helps!
             </p>
@@ -105,8 +105,8 @@ function buildFooterHTML() {
             rel="noopener noreferrer"
             class="footer-btn footer-btn-star"
             id="btn-footer-star"
-            aria-label="Star NitinTrace on GitHub"
-            title="Star NitinTrace on GitHub"
+            aria-label="Star N-Trace on GitHub"
+            title="Star N-Trace on GitHub"
           >
             <span class="footer-btn-star-icon">${icons.star}</span>
             <span>Star on GitHub</span>
@@ -132,9 +132,9 @@ function buildFooterHTML() {
 
       <!-- Brand column -->
       <div class="footer-col footer-brand-col">
-        <div class="footer-logo" aria-label="NitinTrace brand">
+        <div class="footer-logo" aria-label="N-Trace brand">
           <span class="footer-logo-icon" aria-hidden="true">⟐</span>
-          <span class="footer-logo-text">Nitin<span class="footer-logo-accent">Trace</span></span>
+          <span class="footer-logo-text">N-<span class="footer-logo-accent">Trace</span></span>
         </div>
         <p class="footer-tagline">
           See your code think.<br/>
@@ -190,13 +190,13 @@ function buildFooterHTML() {
         <ul class="footer-links" role="list">
           <li role="listitem">
             <a href="${GITHUB_REPO_URL}" target="_blank" rel="noopener noreferrer"
-               class="footer-link" aria-label="View NitinTrace repository on GitHub">
+               class="footer-link" aria-label="View N-Trace repository on GitHub">
               Repository ${icons.externalLink}
             </a>
           </li>
           <li role="listitem">
             <a href="${GITHUB_REPO_URL}/stargazers" target="_blank" rel="noopener noreferrer"
-               class="footer-link" aria-label="Star NitinTrace on GitHub">
+               class="footer-link" aria-label="Star N-Trace on GitHub">
               ⭐ Star the Project ${icons.externalLink}
             </a>
           </li>
@@ -256,7 +256,7 @@ function buildFooterHTML() {
     <div class="footer-bottom">
       <div class="footer-bottom-inner">
         <p class="footer-copyright">
-          &copy; ${year} NitinTrace. All rights reserved.
+          &copy; ${year} N-Trace. All rights reserved.
         </p>
         <p class="footer-built-with">
           Built with

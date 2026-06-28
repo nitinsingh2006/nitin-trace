@@ -1,5 +1,5 @@
 /**
- * NitinTrace — Anthropic Claude AI Adapter
+ * N-Trace — Anthropic Claude AI Adapter
  *
  * Handles all Claude-specific API communication (Anthropic Messages API).
  * Claude does not support response_format, so JSON instructions are embedded
@@ -8,7 +8,7 @@
 
 import { CONFIG } from '@core/config.js';
 import {
-  EXECUTION_TRACE_SYSTEM_PROMPT,
+  getActiveSystemPrompt,
   CLAUDE_JSON_ADDENDUM,
   buildUserPrompt,
 } from './prompts.js';
@@ -31,7 +31,7 @@ export async function fetchClaudeTrace(code, language, apiKey, model, signal) {
   const requestBody = {
     model: selectedModel,
     max_tokens: 8192,
-    system: EXECUTION_TRACE_SYSTEM_PROMPT + CLAUDE_JSON_ADDENDUM,
+    system: getActiveSystemPrompt() + CLAUDE_JSON_ADDENDUM,
     messages: [
       {
         role: 'user',

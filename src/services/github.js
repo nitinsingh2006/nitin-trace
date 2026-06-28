@@ -1,5 +1,5 @@
 /**
- * CodeTrace — GitHub Integration Service
+ * N-Trace — GitHub Integration Service
  *
  * Uses GitHub REST API v3 with a Personal Access Token (PAT).
  * Requires token scope: public_repo (to create repos & push files).
@@ -10,7 +10,7 @@
  */
 
 const GITHUB_API = 'https://api.github.com';
-export const REPO_NAME = 'nitintrace-traces';
+export const REPO_NAME = 'n-trace-traces';
 
 /** Map language IDs to file extensions */
 const EXTENSIONS = {
@@ -56,12 +56,12 @@ function buildFileHeader(language, steps, date) {
 
   return [
     divider,
-    `${cc}  🧪 NitinTrace — AI Execution Trace`,
+    `${cc}  🧪 N-Trace — AI Execution Trace`,
     `${cc}`,
     `${cc}  Language : ${language}`,
     `${cc}  Steps    : ${steps.length}`,
     `${cc}  Saved    : ${dateStr}`,
-    `${cc}  Tool     : NitinTrace (AI-Powered Code Visualizer)`,
+    `${cc}  Tool     : N-Trace (AI-Powered Code Visualizer)`,
     divider,
     `${cc}`,
     `${cc}  EXECUTION SUMMARY:`,
@@ -118,7 +118,7 @@ async function ensureRepo(token, username, repoName) {
     body: JSON.stringify({
       name: repoName,
       description:
-        '🧪 My NitinTrace execution traces — AI-powered step-by-step code visualization',
+        '🧪 My N-Trace execution traces — AI-powered step-by-step code visualization',
       private: false,
       auto_init: true,
     }),
@@ -184,7 +184,7 @@ export async function pushCodeTrace(token, username, code, language, steps, repo
     encoded = btoa(fileContent);
   }
 
-  const commitMessage = `✨ NitinTrace: ${language} (${steps.length} steps) — ${ymd}`;
+  const commitMessage = `✨ N-Trace: ${language} (${steps.length} steps) — ${ymd}`;
 
   const res = await fetch(
     `${GITHUB_API}/repos/${username}/${repoName}/contents/${filepath}`,
@@ -216,7 +216,7 @@ export async function pushCodeTrace(token, username, code, language, steps, repo
 
 export function getGitHubUser() {
   try {
-    const raw = sessionStorage.getItem('nitintrace_github_user');
+    const raw = sessionStorage.getItem('ntrace_github_user');
     return raw ? JSON.parse(raw) : null;
   } catch {
     return null;
@@ -224,15 +224,15 @@ export function getGitHubUser() {
 }
 
 export function getGitHubToken() {
-  return sessionStorage.getItem('nitintrace_github_token') || '';
+  return sessionStorage.getItem('ntrace_github_token') || '';
 }
 
 export function saveGitHubSession(token, user) {
-  sessionStorage.setItem('nitintrace_github_token', token);
-  sessionStorage.setItem('nitintrace_github_user', JSON.stringify(user));
+  sessionStorage.setItem('ntrace_github_token', token);
+  sessionStorage.setItem('ntrace_github_user', JSON.stringify(user));
 }
 
 export function clearGitHubSession() {
-  sessionStorage.removeItem('nitintrace_github_token');
-  sessionStorage.removeItem('nitintrace_github_user');
+  sessionStorage.removeItem('ntrace_github_token');
+  sessionStorage.removeItem('ntrace_github_user');
 }

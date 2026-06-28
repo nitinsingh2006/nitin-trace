@@ -1,12 +1,12 @@
 /**
- * NitinTrace — Groq AI Adapter
+ * N-Trace — Groq AI Adapter
  *
  * Handles all Groq-specific API communication (OpenAI-compatible format).
  */
 
 import { CONFIG } from '@core/config.js';
 import {
-  EXECUTION_TRACE_SYSTEM_PROMPT,
+  getActiveSystemPrompt,
   GROQ_JSON_ADDENDUM,
   buildUserPrompt,
 } from './prompts.js';
@@ -31,7 +31,7 @@ export async function fetchGroqTrace(code, language, apiKey, model, signal) {
     messages: [
       {
         role: 'system',
-        content: EXECUTION_TRACE_SYSTEM_PROMPT + GROQ_JSON_ADDENDUM,
+        content: getActiveSystemPrompt() + GROQ_JSON_ADDENDUM,
       },
       {
         role: 'user',

@@ -1,5 +1,5 @@
 /**
- * NitinTrace — Playback & Execution Trace Engine
+ * N-Trace — Playback & Execution Trace Engine
  *
  * Coordinates trace playback store, step timers, active lines, and speeds.
  * Uses the centralized reactive store store and event bus to communicate.

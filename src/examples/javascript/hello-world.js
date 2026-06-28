@@ -28,5 +28,5 @@ console.log("Length:", length, "characters");
 
 // Template literals
 const year = 2026;
-console.log(\`Welcome to NitinTrace in \${year}!\`);`,
+console.log(\`Welcome to N-Trace in \${year}!\`);`,
 };

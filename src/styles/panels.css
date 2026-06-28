@@ -74,11 +74,10 @@
 }
 
 /* Active trace execution line decoration style */
-.codetrace-active-line-decor {
-  background: rgba(0, 240, 255, 0.1);
-  border-left: 4px solid var(--accent-cyan);
-  box-shadow: inset 10px 0 20px rgba(0, 240, 255, 0.05);
-  animation: codetrace-line-glow 2s infinite alternate;
+.ntrace-active-line-decor {
+  background: rgba(0, 240, 255, 0.08) !important;
+  border-left: 2px solid #00f0ff !important;
+  animation: ntrace-line-glow 2s infinite alternate;
 }
 
 /* Export Dropdown */

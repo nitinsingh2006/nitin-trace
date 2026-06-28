@@ -1,5 +1,5 @@
 /**
- * NitinTrace — AI Service Orchestrator
+ * N-Trace — AI Service Orchestrator
  *
  * Public API for AI execution tracing. Delegates to provider-specific adapters.
  * This file is the only entry point consumers should import.

@@ -1,10 +1,10 @@
 /**
- * NitinTrace — Theme Service
+ * N-Trace — Theme Service
  * Manages light/dark/system theme switching.
  * Persists preference to localStorage.
  */
 
-const THEME_KEY = 'nitintrace_theme';
+const THEME_KEY = 'ntrace_theme';
 const THEMES = ['dark', 'light', 'system'];
 
 export const themeService = {

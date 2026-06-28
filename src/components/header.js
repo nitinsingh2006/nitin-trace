@@ -1,5 +1,5 @@
 /**
- * NitinTrace — Header Component
+ * N-Trace — Header Component
  *
  * Renders the top navigation bar.
  * Subscribes to the global store store to reflect GitHub auth status reactively.
@@ -15,7 +15,7 @@ export function initHeader(container) {
       <div class="header-left">
         <div class="logo">
           <span class="logo-icon">⟐</span>
-          <span class="logo-text">Nitin<span class="logo-accent">Trace</span></span>
+          <span class="logo-text">N-<span class="logo-accent">Trace</span></span>
         </div>
         <span class="version-badge">v1.0</span>
       </div>

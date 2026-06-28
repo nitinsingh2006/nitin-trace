@@ -1,12 +1,12 @@
 /**
- * NitinTrace — OpenAI AI Adapter
+ * N-Trace — OpenAI AI Adapter
  *
  * Handles all OpenAI-specific API communication (OpenAI-compatible format).
  */
 
 import { CONFIG } from '@core/config.js';
 import {
-  EXECUTION_TRACE_SYSTEM_PROMPT,
+  getActiveSystemPrompt,
   buildUserPrompt,
 } from './prompts.js';
 import { parseTraceResponseAsync } from './worker-client.js';
@@ -30,7 +30,7 @@ export async function fetchOpenaiTrace(code, language, apiKey, model, signal) {
     messages: [
       {
         role: 'system',
-        content: EXECUTION_TRACE_SYSTEM_PROMPT,
+        content: getActiveSystemPrompt(),
       },
       {
         role: 'user',

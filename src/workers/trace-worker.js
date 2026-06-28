@@ -1,5 +1,5 @@
 /**
- * NitinTrace — Trace Parsing Web Worker
+ * N-Trace — Trace Parsing Web Worker
  * Parses and sanitizes AI trace JSON responses off the main thread.
  */
 

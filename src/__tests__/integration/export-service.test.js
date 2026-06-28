@@ -79,9 +79,9 @@ describe('exportToMarkdown()', () => {
     expect(md).toContain('Sorted: [12, 22, 25, 34, 64]');
   });
 
-  it('includes NitinTrace attribution', () => {
+  it('includes N-Trace attribution', () => {
     const md = exportToMarkdown(SAMPLE_CODE, 'python', SAMPLE_STEPS);
-    expect(md).toContain('NitinTrace');
+    expect(md).toContain('N-Trace');
   });
 
   it('handles empty steps array', () => {
@@ -117,9 +117,9 @@ describe('exportToJSON()', () => {
 
   it('includes meta block with app name and version', () => {
     const data = JSON.parse(exportToJSON(SAMPLE_CODE, 'python', SAMPLE_STEPS));
-    expect(data.meta.app).toBe('NitinTrace');
+    expect(data.meta.app).toBe('N-Trace');
     expect(data.meta.version).toBeTruthy();
-    expect(data.meta.format).toBe('nitintrace-trace-v1');
+    expect(data.meta.format).toBe('n-trace-v1');
   });
 
   it('includes exportedAt ISO timestamp', () => {

@@ -1,5 +1,5 @@
 /**
- * NitinTrace — Utility Helpers
+ * N-Trace — Utility Helpers
  */
 
 /**

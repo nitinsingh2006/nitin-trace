@@ -1,9 +1,9 @@
 /**
- * NitinTrace — Visualizer Panel Component
+ * N-Trace — Visualizer Panel Component
  *
  * Renders the execution trace details: explanation card, variables table,
  * console output, program output, line preview, and progress bar.
- * Subscribes reactively to state updates: trace.steps, trace.currentIndex, trace.isLoading, trace.error.
+ * Subscribes reactively to state updates: trace.steps, trace.currentIndex, trace.isTracing, trace.error.
  */
 
 import store from '../core/state.js';
@@ -155,8 +155,8 @@ export function initVisualizerPanel(container) {
   });
 
   // React to loading state
-  store.subscribe('trace.isLoading', (isLoading) => {
-    if (isLoading) {
+  store.subscribe('trace.isTracing', (isTracing) => {
+    if (isTracing) {
       emptyState.style.display = 'none';
       errorScreen.style.display = 'none';
       vizSections.style.display = 'none';
@@ -193,7 +193,7 @@ export function initVisualizerPanel(container) {
 
     if (steps.length === 0 || index < 0) {
       // Show empty state if not loading and no error
-      if (!store.get('trace.isLoading') && !store.get('trace.error')) {
+      if (!store.get('trace.isTracing') && !store.get('trace.error')) {
         emptyState.style.display = 'flex';
         vizSections.style.display = 'none';
         btnSaveGithub.style.display = 'none';
@@ -304,7 +304,11 @@ export function initVisualizerPanel(container) {
       let valString = '';
       let valType = '';
 
-      if (rawVal === null || rawVal === undefined) {
+      // Check if rawVal is the new {value, type} format from parser
+      if (rawVal && typeof rawVal === 'object' && 'value' in rawVal && 'type' in rawVal) {
+        valString = rawVal.value;
+        valType = rawVal.type;
+      } else if (rawVal === null || rawVal === undefined) {
         valString = 'null';
         valType = 'null';
       } else if (typeof rawVal === 'object') {

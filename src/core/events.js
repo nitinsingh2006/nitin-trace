@@ -258,7 +258,7 @@ class EventBus {
   /**
    * Get debug info
    */
-  debug() {
+  getDebugInfo() {
     return {
       listeners: Object.keys(this.listeners).reduce((acc, event) => {
         acc[event] = this.listeners[event].length;

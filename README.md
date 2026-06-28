@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🔮 NitinTrace
+# 🔮 N-Trace
 
 ### AI-Powered Code Execution Visualizer
 
@@ -15,9 +15,9 @@
 
 ---
 
-## ✨ What is NitinTrace?
+## ✨ What is N-Trace?
 
-NitinTrace is an **AI-powered code execution visualizer** — paste any code, pick a language, and watch the AI trace every variable, call stack, and output **step-by-step**, with no runtime needed.
+N-Trace is an **AI-powered code execution visualizer** — paste any code, pick a language, and watch the AI trace every variable, call stack, and output **step-by-step**, with no runtime needed.
 
 No Python? No problem. No JVM? No problem. The AI understands your code semantically and simulates execution — variable states, console output, and plain-English explanations — all visualized in a beautiful, interactive UI.
 
@@ -99,7 +99,7 @@ cp .env.example .env.local
 ## 🗂️ Project Structure
 
 ```
-nitintrace/
+n-trace/
 ├── src/
 │   ├── main.js               # Entry point (~60 lines)
 │   ├── app.js                # App shell orchestrator

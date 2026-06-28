@@ -1,9 +1,9 @@
 /**
- * NitinTrace — PWA Service Worker
+ * N-Trace — PWA Service Worker
  * Serves app shell and assets offline, using stale-while-revalidate strategy.
  */
 
-const CACHE_NAME = 'nitintrace-cache-v1';
+const CACHE_NAME = 'ntrace-cache-v1';
 const PRECACHE_ASSETS = [
   '/',
   '/index.html',

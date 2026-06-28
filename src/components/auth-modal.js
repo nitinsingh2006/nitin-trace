@@ -1,5 +1,5 @@
 /**
- * NitinTrace — Authentication & User Dashboard Modal
+ * N-Trace — Authentication & User Dashboard Modal
  *
  * Implements a local-first user authentication simulator (Google, GitHub, X, Email)
  * and an interactive User Dashboard to manage profile settings, API Keys, and saved trace files.
@@ -70,7 +70,7 @@ export function initAuthModal(container) {
               <div class="user-avatar-large" id="dashboard-avatar">N</div>
               <div class="user-profile-meta">
                 <h2 id="dashboard-name">Nitin Singh</h2>
-                <p id="dashboard-email">nitin@nitintrace.dev</p>
+                <p id="dashboard-email">user@n-trace.dev</p>
                 <span class="badge badge-provider" id="dashboard-provider">Google Account</span>
               </div>
             </div>
@@ -92,6 +92,7 @@ export function initAuthModal(container) {
                     <input type="password" id="dash-gemini-key" class="form-input" placeholder="Not configured" />
                     <button class="btn btn-ghost toggle-key-visibility" title="Toggle visibility">👁️</button>
                   </div>
+                  <p class="key-hint">🆓 Free &nbsp;<a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener noreferrer" class="key-link">Get Gemini Key ↗</a></p>
                 </div>
 
                 <div class="form-group">
@@ -100,6 +101,7 @@ export function initAuthModal(container) {
                     <input type="password" id="dash-groq-key" class="form-input" placeholder="Not configured" />
                     <button class="btn btn-ghost toggle-key-visibility" title="Toggle visibility">👁️</button>
                   </div>
+                  <p class="key-hint">🆓 Free &nbsp;<a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer" class="key-link">Get Groq Key ↗</a></p>
                 </div>
 
                 <div class="form-group">
@@ -108,6 +110,7 @@ export function initAuthModal(container) {
                     <input type="password" id="dash-openai-key" class="form-input" placeholder="Not configured" />
                     <button class="btn btn-ghost toggle-key-visibility" title="Toggle visibility">👁️</button>
                   </div>
+                  <p class="key-hint">💳 Paid &nbsp;<a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener noreferrer" class="key-link">Get OpenAI Key ↗</a></p>
                 </div>
 
                 <div class="form-group">
@@ -116,6 +119,7 @@ export function initAuthModal(container) {
                     <input type="password" id="dash-claude-key" class="form-input" placeholder="Not configured" />
                     <button class="btn btn-ghost toggle-key-visibility" title="Toggle visibility">👁️</button>
                   </div>
+                  <p class="key-hint">💳 Paid &nbsp;<a href="https://console.anthropic.com/settings/keys" target="_blank" rel="noopener noreferrer" class="key-link">Get Claude Key ↗</a></p>
                 </div>
 
                 <div class="form-group">
@@ -124,6 +128,7 @@ export function initAuthModal(container) {
                     <input type="password" id="dash-github-token" class="form-input" placeholder="Not configured" />
                     <button class="btn btn-ghost toggle-key-visibility" title="Toggle visibility">👁️</button>
                   </div>
+                  <p class="key-hint">🆓 Free &nbsp;<a href="https://github.com/settings/tokens/new?scopes=public_repo&description=N-Trace+Traces" target="_blank" rel="noopener noreferrer" class="key-link">Get GitHub Token ↗</a></p>
                 </div>
 
                 <div class="form-group">
@@ -172,7 +177,7 @@ export function initAuthModal(container) {
   const btnClose = modalEl.querySelector('#auth-close');
   const signinView = modalEl.querySelector('#auth-signin-view');
   const dashboardView = modalEl.querySelector('#auth-dashboard-view');
-  
+
   // Sign-in view elements
   const btnGoogle = modalEl.querySelector('#btn-auth-google');
   const btnGithub = modalEl.querySelector('#btn-auth-github');
@@ -230,7 +235,7 @@ export function initAuthModal(container) {
     btn.addEventListener('click', () => {
       tabBtns.forEach(b => b.classList.remove('active'));
       tabContents.forEach(c => c.classList.remove('active'));
-      
+
       btn.classList.add('active');
       const targetId = btn.dataset.tab;
       modalEl.querySelector(`#${targetId}`).classList.add('active');
@@ -258,7 +263,7 @@ export function initAuthModal(container) {
     store.set('settings.openaiApiKey', openaiInput.value.trim());
     store.set('settings.claudeApiKey', claudeInput.value.trim());
     store.set('settings.explanationLanguage', explanationLangInput.value);
-    
+
     const githubVal = githubInput.value.trim();
     store.set('github.token', githubVal);
     store.set('github.isAuthenticated', !!githubVal);
@@ -269,7 +274,7 @@ export function initAuthModal(container) {
   // Login Simulator Action
   const performSimulatedLogin = (name, email, provider) => {
     eventBus.emit('toast:show', { message: `Connecting to ${provider}...`, type: 'info' });
-    
+
     // Simulate slight network delay
     setTimeout(() => {
       const user = {
@@ -279,10 +284,10 @@ export function initAuthModal(container) {
         avatar: name.charAt(0).toUpperCase(),
         createdAt: new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'long' })
       };
-      
+
       store.set('auth.user', user);
       store.set('auth.isLoggedIn', true);
-      
+
       eventBus.emit('toast:show', { message: `Successfully logged in via ${provider}!`, type: 'success' });
       renderViewFromState();
     }, 800);
@@ -318,7 +323,7 @@ export function initAuthModal(container) {
   // Render Saved Files List
   const loadSavedFilesList = async () => {
     savedFilesContainer.innerHTML = '<div class="spinner-container"><div class="spinner"></div><p>Loading files...</p></div>';
-    
+
     try {
       const history = await getTraceHistory();
       if (!history || history.length === 0) {
@@ -362,7 +367,7 @@ export function initAuthModal(container) {
         // Wire Actions
         fileEl.querySelector('.btn-load-file').addEventListener('click', () => {
           eventBus.emit('editor:set-code', { code: item.code, language: item.language });
-          
+
           // Re-load the traces into visualizer
           store.set('trace.steps', item.steps);
           store.set('trace.totalSteps', item.steps.length);
@@ -421,7 +426,7 @@ export function initAuthModal(container) {
       dashboardJoinedDate.textContent = user.createdAt || '';
 
       populateKeyInputs();
-      
+
       // If we are currently on the files tab, refresh files list
       const activeTabBtn = modalEl.querySelector('.tab-btn.active');
       if (activeTabBtn && activeTabBtn.dataset.tab === 'tab-files') {
@@ -430,7 +435,7 @@ export function initAuthModal(container) {
     } else {
       signinView.style.display = 'block';
       dashboardView.style.display = 'none';
-      
+
       // Clear forms
       emailInput.value = '';
       passwordInput.value = '';

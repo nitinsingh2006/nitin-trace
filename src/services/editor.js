@@ -1,5 +1,5 @@
 /**
- * CodeTrace — Monaco Editor Service
+ * N-Trace — Monaco Editor Service
  * Handles initialization, loading, formatting, language change,
  * themes, and execution line highlighting.
  */
@@ -44,7 +44,7 @@ export async function initEditor(container, initialLanguage) {
     const monaco = await loadMonaco();
 
     // Define custom dark cyber theme matching style.css design tokens
-    monaco.editor.defineTheme('codetrace-theme', {
+    monaco.editor.defineTheme('ntrace-theme', {
       base: 'vs-dark',
       inherit: true,
       rules: [
@@ -79,7 +79,7 @@ export async function initEditor(container, initialLanguage) {
     editorInstance = monaco.editor.create(container, {
       value: sampleCode,
       language: initialLanguage,
-      theme: 'codetrace-theme',
+      theme: 'ntrace-theme',
       automaticLayout: true,
       fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
       fontSize: 13,
@@ -154,7 +154,7 @@ export function highlightActiveLine(lineNumber) {
       range: new window.monaco.Range(lineNumber, 1, lineNumber, 1),
       options: {
         isWholeLine: true,
-        className: 'codetrace-active-line-decor'
+        className: 'ntrace-active-line-decor'
       }
     }
   ]);

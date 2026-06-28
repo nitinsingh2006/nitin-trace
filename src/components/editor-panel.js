@@ -1,5 +1,5 @@
 /**
- * NitinTrace — Editor Panel Component
+ * N-Trace — Editor Panel Component
  *
  * Renders the editor panel container, initializes the Monaco Editor,
  * manages language selection, and wires the Trace button via Event Bus.
@@ -274,13 +274,13 @@ export function initEditorPanel(container) {
     switch (action) {
       case 'markdown': {
         const md = exportToMarkdown(code, language, steps);
-        downloadAsFile(md, `nitintrace-${timestamp}.md`, 'text/markdown');
+        downloadAsFile(md, `n-trace-${timestamp}.md`, 'text/markdown');
         eventBus.emit('toast:show', { message: 'Markdown report downloaded.', type: 'success' });
         break;
       }
       case 'json': {
         const json = exportToJSON(code, language, steps);
-        downloadAsFile(json, `nitintrace-${timestamp}.json`, 'application/json');
+        downloadAsFile(json, `n-trace-${timestamp}.json`, 'application/json');
         eventBus.emit('toast:show', { message: 'JSON export downloaded.', type: 'success' });
         break;
       }

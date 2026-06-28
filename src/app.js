@@ -131,7 +131,7 @@ function initKeyboardShortcuts() {
       // Only handle Ctrl+Enter inside Monaco
       if (e.ctrlKey && e.key === 'Enter') {
         e.preventDefault();
-        eventBus.emit(EVENTS.KEYBOARD_SHORTCUT, { key: 'trace', originalEvent: e });
+        eventBus.emit('editor:ctrl-enter');
       }
       return;
     }
@@ -139,25 +139,26 @@ function initKeyboardShortcuts() {
     switch (e.key) {
       case ' ':
         e.preventDefault();
-        eventBus.emit(EVENTS.TRACE_PLAY);
+        eventBus.emit('playback:toggle');
         break;
       case 'ArrowLeft':
-        eventBus.emit(EVENTS.KEYBOARD_SHORTCUT, { key: 'prevStep', originalEvent: e });
+        eventBus.emit('playback:prev');
         break;
       case 'ArrowRight':
-        eventBus.emit(EVENTS.KEYBOARD_SHORTCUT, { key: 'nextStep', originalEvent: e });
+        eventBus.emit('playback:next');
         break;
       case 'Home':
-        eventBus.emit(EVENTS.KEYBOARD_SHORTCUT, { key: 'firstStep', originalEvent: e });
+        eventBus.emit('playback:restart');
         break;
       case 'End':
         e.preventDefault();
-        eventBus.emit(EVENTS.KEYBOARD_SHORTCUT, { key: 'lastStep', originalEvent: e });
+        eventBus.emit('playback:end');
         break;
       case 'Enter':
         if (e.ctrlKey) {
           e.preventDefault();
-          eventBus.emit(EVENTS.KEYBOARD_SHORTCUT, { key: 'trace', originalEvent: e });
+          // Trigger trace via editor-panel's requestTrace path
+          eventBus.emit('editor:ctrl-enter');
         }
         break;
     }
@@ -174,6 +175,16 @@ const PROVIDER_API_KEY_MAP = {
 };
 
 const PROVIDER_LABELS = { gemini: 'Gemini', groq: 'Groq', openai: 'OpenAI', claude: 'Claude' };
+
+// Bridge: editor-panel emits 'trace:request'; this fans out to TRACE_START
+eventBus.on('trace:request', ({ code, language }) => {
+  eventBus.emit(EVENTS.TRACE_START, { code, language });
+});
+
+// Bridge: FAB emits 'trace:request-fab' → delegate to editor:ctrl-enter path
+eventBus.on('trace:request-fab', () => {
+  eventBus.emit('editor:ctrl-enter');
+});
 
 eventBus.on(EVENTS.TRACE_START, async ({ code, language }) => {
   const provider = store.get('settings.provider') || 'gemini';

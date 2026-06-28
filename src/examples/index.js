@@ -1,5 +1,5 @@
 /**
- * NitinTrace — Example Library Registry
+ * N-Trace — Example Library Registry
  *
  * Curated code examples organized by category and language.
  * Each entry maps to a file in src/examples/<language>/<id>.<ext>

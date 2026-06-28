@@ -1,5 +1,5 @@
 /**
- * NitinTrace — Trace Worker Client
+ * N-Trace — Trace Worker Client
  * Interface to communicate with the trace-worker.
  * Falls back to synchronous parsing in environments where Web Workers are unavailable (e.g., tests).
  */

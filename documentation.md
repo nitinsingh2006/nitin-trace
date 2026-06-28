@@ -1,6 +1,6 @@
-# 📖 NitinTrace — User Step-by-Step Guide
+# 📖 N-Trace — User Step-by-Step Guide
 
-Welcome to **NitinTrace**! This guide will walk you through setting up, writing code, visualizing step-by-step execution, and syncing your traces directly to your GitHub profile.
+Welcome to **N-Trace**! This guide will walk you through setting up, writing code, visualizing step-by-step execution, and syncing your traces directly to your GitHub profile.
 
 ---
 
@@ -21,7 +21,7 @@ npm run dev
 Open the local URL shown in your terminal (usually `http://localhost:5174` or `http://localhost:5173`) in your web browser.
 
 ### 2. Configure Your AI API Key
-NitinTrace simulates code execution using advanced AI models. You need to configure an API key first:
+N-Trace simulates code execution using advanced AI models. You need to configure an API key first:
 1. Click the **Settings (⚙️)** button in the top-right header.
 2. Select your AI Provider: **Google Gemini** (Recommended, free tier available) or **Groq**.
 3. Paste your API key into the input field.
@@ -65,7 +65,7 @@ As you step through the trace, look at the **Variables** table in the center pan
 
 ## ⚠️ Step 5: Handling Errors
 
-NitinTrace will detect and highlight mistakes in your code:
+N-Trace will detect and highlight mistakes in your code:
 *   **Syntax Errors**: Typos, unclosed brackets, or invalid keywords will halt execution. The visualizer will show a single step pointing to the error line, explaining the syntax problem, and displaying `SyntaxError` in red text in the terminal console.
 *   **Runtime Errors**: Division by zero, accessing undefined references, or out-of-bounds errors will trace successfully up to the failing line, output the stack trace/error message to the console, and stop.
 
@@ -77,14 +77,13 @@ Build a portfolio of your learning by pushing execution traces directly to GitHu
 
 ### 1. Connect GitHub Account
 1. Click the **GitHub (🐙)** button in the header.
-2. Paste a GitHub **Personal Access Token (PAT)**. 
-   - *Generate a token here: [GitHub Settings](https://github.com/settings/tokens/new?scopes=public_repo&description=NitinTrace+Traces). Make sure you select the `public_repo` scope.*
+2. Paste a GitHub **Personal Access Token (PAT)**.    - *Generate a token here: [GitHub Settings](https://github.com/settings/tokens/new?scopes=public_repo&description=N-Trace+Traces). Make sure you select the `public_repo` scope.*
 3. Click **Connect GitHub**. The header button will change to show your GitHub avatar and username.
 
 ### 2. Export a Trace
 1. After running a trace, click the **Save to GitHub (📤)** button next to the step counter.
 2. A configuration popup will appear:
-   - **Repository Name**: Pre-filled with `nitintrace-traces`. You can change this to any repository name you want (it will be created automatically if it doesn't exist).
+    - **Repository Name**: Pre-filled with `n-trace-traces`. You can change this to any repository name you want (it will be created automatically if it doesn't exist).
    - **Filename**: Enter a custom filename. If left blank, it will auto-save with a timestamp.
 3. Click **Push Trace**.
 4. Once completed, a direct link to your code on GitHub will print inside the terminal console emulator!
@@ -93,7 +92,7 @@ Build a portfolio of your learning by pushing execution traces directly to GitHu
 
 ## ⏳ Step 7: Local History
 
-NitinTrace stores your previous traces locally inside your browser using IndexedDB:
+N-Trace stores your previous traces locally inside your browser using IndexedDB:
 *   Click **History (⏳)** in the header to open your past runs drawer.
 *   Search and filter traces by code contents or language.
 *   Click any history item to immediately restore the code, language, and trace playback steps.
